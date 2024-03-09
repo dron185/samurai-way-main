@@ -1,0 +1,14 @@
+.header {
+    grid-area: h;
+    background-color: #7ad97a;
+    /*min-height: 90px;*/
+}
+
+.header div {
+    display: flex;
+    align-items: center;
+}
+
+.header img {
+    /*display: inline-block;*/
+}
