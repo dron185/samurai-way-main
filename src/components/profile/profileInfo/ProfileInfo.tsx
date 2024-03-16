@@ -1,13 +1,12 @@
 import React from 'react';
 import s from './ProfileInfo.module.css'
+import photo from '../../../assets/images/leaves-1350175_1920.jpg'
 
 const ProfileInfo = () => {
     return (
-        <div>
-            <div>
-                <img
-                    src="https://static6.depositphotos.com/1004999/574/i/450/depositphotos_5743212-stock-photo-green-environment.jpg"
-                    alt=""/>
+        <div className={s.profileInfo}>
+            <div className={s.profilePhoto}>
+                <img src={photo} alt="Photo"/>
             </div>
             <div className={s.descriptionBlock}>
                 ava + description
