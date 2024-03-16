@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 export const Navbar = () => {
     return (
         <nav className={s.nav}>
-            <ul>
+            <ul className={s.list}>
                 <li className={`${s.item} ${s.active}`}><NavLink to={"/profile"} activeClassName={s.activeLink}>Profile</NavLink></li>
                 <li className={s.item}><NavLink to={"/dialogs"} activeClassName={s.activeLink}>Messages</NavLink></li>
                 <li className={s.item}><NavLink to={"/news"} activeClassName={s.activeLink}>News</NavLink></li>

@@ -1,10 +1,21 @@
 .nav {
     background-color: transparent;
-    padding: 20px;
+    padding: 20px 20px 20px 0;
+}
+
+.list > *:not(:last-child) {
+    margin-bottom: 30px;
+}
+
+.item {
+    font-size: 32px;
+    line-height: 125%;
 }
 
 .item a {
     color: white;
+    background-color: #324A5E;
+    border-radius: 10px;
 }
 
 .item a.activeLink {
