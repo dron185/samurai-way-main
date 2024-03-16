@@ -1,28 +1,25 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/header/Header";
-import {Navbar} from "./components/navbar/Navbar";
-import {Profile} from "./components/profile/Profile";
-import {Dialogs} from "./components/dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
-import {News} from "./components/news/News";
-import {Music} from "./components/music/Music";
-import {Settings} from "./components/settings/Settings";
+import {Header} from "./layout/header/Header";
+import {Navbar} from "./layout/main/navbar/Navbar";
+import {BrowserRouter} from "react-router-dom";
+import {Main} from "./layout/main/Main";
+import {Footer} from "./layout/footer/Footer";
+import {Container} from "./components/container/Container";
+import {MainContent} from "./layout/main/mainContent/MainContent";
 
 function App() {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
-                Hello, samurai! Let's go!
                 <Header/>
-                <Navbar/>
-                <div className={'app-wrapper-content'}>
-                    <Route path={'/dialogs'} component={Dialogs}/>
-                    <Route path={'/profile'} component={Profile}/>
-                    <Route path={'/news'} component={News}/>
-                    <Route path={'/music'} component={Music}/>
-                    <Route path={'/settings'} component={Settings}/>
-                </div>
+                <Main>
+                    <Container>
+                        <Navbar/>
+                        <MainContent/>
+                    </Container>
+                </Main>
+                <Footer/>
             </div>
         </BrowserRouter>
     );
