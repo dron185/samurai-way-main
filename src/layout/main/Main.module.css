@@ -11,6 +11,6 @@
     /*flex: 1 1 auto;*/
 }
 
-.main div{
+.main > div{
     display: flex;
 }

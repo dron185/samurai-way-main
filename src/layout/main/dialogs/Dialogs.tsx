@@ -35,7 +35,6 @@ export const Dialogs = () => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {/*<DialogItem name={dialogsData[0].name} id={dialogsData[0].id}/>*/}
 
                 {dialogsData.map(el=>
                     <DialogItem name={el.name} id={el.id}/>
