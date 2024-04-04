@@ -7,8 +7,8 @@ type MainPropsType = {
 
 export const Main = ({children}: PropsWithChildren<MainPropsType>) => {
     return (
-        <div className={s.main}>
+        <main className={s.main}>
             {children}
-        </div>
+        </main>
     );
 };

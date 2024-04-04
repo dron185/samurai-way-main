@@ -1,10 +1,10 @@
 import React from 'react';
 import {Route} from "react-router-dom";
-import {Dialogs} from "../../../components/dialogs/Dialogs";
-import {Profile} from "../../../components/profile/Profile";
-import {News} from "../../../components/news/News";
-import {Music} from "../../../components/music/Music";
-import {Settings} from "../../../components/settings/Settings";
+import {Dialogs} from "../dialogs/Dialogs";
+import {Profile} from "../profile/Profile";
+import {News} from "../news/News";
+import {Music} from "../music/Music";
+import {Settings} from "../settings/Settings";
 import s from './MainContent.module.css'
 
 export const MainContent = () => {

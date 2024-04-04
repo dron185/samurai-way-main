@@ -1,12 +1,14 @@
 .main {
     min-height: 100vh;
-    /*background-color: bisque;*/
-    background-image: url("../../assets/images/background.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
+    background-color: bisque;
+    /*background-image: url("../../assets/images/background.jpg");*/
+    /*background-position: center;*/
+    /*background-size: cover;*/
+    /*background-repeat: no-repeat;*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+
+    /*flex: 1 1 auto;*/
 }
 
 .main div{

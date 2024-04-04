@@ -3,8 +3,8 @@ import s from './Footer.module.css';
 
 export const Footer = () => {
     return (
-        <div className={s.footer}>
+        <footer className={s.footer}>
 123
-        </div>
+        </footer>
     );
 };
