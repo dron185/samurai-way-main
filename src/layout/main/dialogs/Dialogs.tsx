@@ -1,29 +1,22 @@
 import React from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem";
+import {Message} from "./Message";
 
-type MessagePropsType = {
-    message: string
-}
-
-type DialogItemPropsType = {
+type DialogItemType = {
     id: string
     name: string
 }
-
-// type dialogsDataPropsType = {
-//     DialogItemPropsType[]
-// }
-
-const Message = (props: MessagePropsType) => {
-    return (
-        <div className={s.message}>{props.message}</div>
-    )
+type messageType = {
+    id: string
+    message: string
 }
+type dialogsDataType =  DialogItemType[]
+type messagesDataType = messageType[]
 
 export const Dialogs = () => {
 
-    let dialogsData: DialogItemPropsType[] = [
+    let dialogs: dialogsDataType = [
         {id: '1', name: 'Andrew'},
         {id: '2', name: 'Dimych'},
         {id: '3', name: 'Sveta'},
@@ -32,25 +25,25 @@ export const Dialogs = () => {
         {id: '6', name: 'Valera'}
     ]
 
+    let messages: messagesDataType = [
+        {id: '1', message: 'Hi'},
+        {id: '2', message: 'How is your it-kamasutra?'},
+        {id: '3', message: 'Yo!'},
+        {id: '4', message: 'Yo!'},
+        {id: '5', message: 'Yo!'},
+        {id: '5', message: 'YoYo!'},
+    ]
+
+    let dialogsElements = dialogs.map(el=> <DialogItem key={el.id} name={el.name} id={el.id}/>)
+    let messagesElements = messages.map(el=> <Message key={el.id} message={el.message}/>)
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-
-                {dialogsData.map(el=>
-                    <DialogItem name={el.name} id={el.id}/>
-                )}
-
-                {/*<DialogItem name={'Andrew'} id={'1'}/>*/}
-                {/*<DialogItem name={'Dimych'} id={'2'}/>*/}
-                {/*<DialogItem name={'Sveta'} id={'3'}/>*/}
-                {/*<DialogItem name={'Sasha'} id={'4'}/>*/}
-                {/*<DialogItem name={'Victor'} id={'5'}/>*/}
-                {/*<DialogItem name={'Valera'} id={'6'}/>*/}
+                {dialogsElements}
             </div>
             <div className={s.messages}>
-                <Message message={'Hi!'}/>
-                <Message message={'How is your it-kamasutra?'}/>
-                <Message message={'Yo!'}/>
+                {messagesElements}
             </div>
         </div>
     );
