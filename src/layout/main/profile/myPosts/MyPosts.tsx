@@ -10,10 +10,13 @@ type postType = {
 type postsDataType = postType[]
 
 export const MyPosts = () => {
-    let postsData: postsDataType = [
+    let posts: postsDataType = [
         {id: '1', message: 'Hi, how are you?', likesCount: 12},
         {id: '2', message: "It's my first post", likesCount: 11},
+        {id: '3', message: "BlaBla", likesCount: 7},
+        {id: '4', message: "DaDa", likesCount: 5},
     ]
+    let postsElements = posts.map(el => <Post key={el.id} message={el.message} likesCount={el.likesCount}/>)
 
     return (
         <div className={s.postsBlock}>
@@ -28,10 +31,8 @@ export const MyPosts = () => {
                 {/*<button>Remove</button>*/}
             </div>
             <div className={s.posts}>
-                <Post message ={postsData[0].message} likesCount={postsData[0].likesCount}/>
-                <Post message ={postsData[1].message} likesCount={postsData[1].likesCount}/>
+                {postsElements}
             </div>
         </div>
-
     );
 };
