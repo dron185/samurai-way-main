@@ -10,7 +10,7 @@ import {MainContent} from "./layout/main/mainContent/MainContent";
 import {RootStateType} from "./redux/state";
 
 type AppPropsType = {
-    appState: RootStateType
+    state: RootStateType
 }
 
 function App(props: AppPropsType) {
@@ -22,10 +22,10 @@ function App(props: AppPropsType) {
                 <Main>
                     <Container>
                         <Navbar/>
-                        <MainContent
-                            posts={props.appState.posts}
-                            dialogs={props.appState.dialogs}
-                            messages={props.appState.messages}
+                        <MainContent state={props.state}
+                            // posts={props.state.profilePage.posts}
+                            // dialogs={props.state.dialogsPage.dialogs}
+                            // messages={props.state.dialogsPage.messages}
                         />
                     </Container>
                 </Main>

@@ -6,12 +6,10 @@ import {News} from "../news/News";
 import {Music} from "../music/Music";
 import {Settings} from "../settings/Settings";
 import s from './MainContent.module.css'
-import {DialogType, MessageType, PostType} from "../../../redux/state";
+import {RootStateType} from "../../../redux/state";
 
 type MainContentPropsType = {
-    posts: PostType[]
-    dialogs: DialogType[]
-    messages: MessageType[]
+    state: RootStateType
 }
 
 export const MainContent: React.FC<MainContentPropsType> = (props) => {
@@ -19,10 +17,10 @@ export const MainContent: React.FC<MainContentPropsType> = (props) => {
         <div className={s.mainContent}>
             {/*<Route path={'/dialogs'} component={Dialogs}/>*/}
             <Route path={'/dialogs'} render={()=><Dialogs
-                dialogs={props.dialogs}
-                messages={props.messages}
+                dialogs={props.state.dialogsPage.dialogs}
+                messages={props.state.dialogsPage.messages}
             />}/>
-            <Route path={'/profile'} render={()=><Profile posts={props.posts}/>}/>
+            <Route path={'/profile'} render={()=><Profile posts={props.state.profilePage.posts}/>}/>
             <Route path={'/news'} component={News}/>
             <Route path={'/music'} component={Music}/>
             <Route path={'/settings'} component={Settings}/>
