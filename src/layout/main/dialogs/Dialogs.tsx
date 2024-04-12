@@ -13,7 +13,8 @@ type DialogsPropsType = {
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     let dialogsElements = props.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
-    let messagesElements = props.messages.map(el => <Message key={el.id} message={el.message}/>)
+    let messagesElements = props.messages.map(el =><div className={s.messageWrapper}><img className={s.avatar} src={avatar} alt="avatar"/><Message
+        key={el.id} message={el.message}/></div>)
 
     return (
         <div className={s.dialogs}>

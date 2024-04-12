@@ -7,9 +7,10 @@ type MessagePropsType = {
 }
 export const Message: React.FC<MessagePropsType> = (props) => {
     return (
-        <div className={s.messageContainer}>
-            {/*<img className={s.avatar} src={avatar} alt="avatar"/>*/}
-            <div className={s.message}>{props.message}</div>
-        </div>
+        <div className={s.message}>{props.message}</div>
+    // <div className={s.messageContainer}>
+    // {/*<img className={s.avatar} src={avatar} alt="avatar"/>*/}
+    //
+    //     </div>
     )
 }

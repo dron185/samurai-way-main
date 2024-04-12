@@ -24,6 +24,19 @@
     flex-direction: column;
     gap: 15px;
     padding: 10px;
+    flex-grow: 1;
+    background-color: #2990b6;
+}
+
+
+.messageWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.messageWrapper:nth-child(even) {
+    flex-direction: row-reverse;
 }
 
 .avatar {
@@ -32,3 +45,4 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
