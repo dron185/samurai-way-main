@@ -16,22 +16,20 @@ type AppPropsType = {
 function App(props: AppPropsType) {
 
     return (
-        <BrowserRouter>
-            <div className="app-wrapper">
-                <Header/>
-                <Main>
-                    <Container>
-                        <Navbar/>
-                        <MainContent state={props.state}
-                            // posts={props.state.profilePage.posts}
-                            // dialogs={props.state.dialogsPage.dialogs}
-                            // messages={props.state.dialogsPage.messages}
-                        />
-                    </Container>
-                </Main>
-                <Footer/>
-            </div>
-        </BrowserRouter>
+        <div className="app-wrapper">
+            <Header/>
+            <Main>
+                <Container>
+                    <Navbar/>
+                    <MainContent state={props.state}
+                        // posts={props.state.profilePage.posts}
+                        // dialogs={props.state.dialogsPage.dialogs}
+                        // messages={props.state.dialogsPage.messages}
+                    />
+                </Container>
+            </Main>
+            <Footer/>
+        </div>
     );
 }
 

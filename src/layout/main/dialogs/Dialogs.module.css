@@ -1,6 +1,8 @@
 .dialogs {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
+    /*display: grid;*/
+    /*grid-template-columns: 2fr 10fr;*/
+    display: flex;
+    gap: 20px;
 }
 
 .dialogsItems {
@@ -15,9 +17,7 @@
 /*}*/
 
 
-.link {
-    color: white;
-}
+
 
 .messages {
     display: flex;
@@ -26,10 +26,9 @@
     padding: 10px;
 }
 
-.message {
-    color: white;
-}
-
-.active {
-    color: #7ad97a;
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
