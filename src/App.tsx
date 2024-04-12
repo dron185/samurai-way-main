@@ -20,11 +20,8 @@ function App(props: AppPropsType) {
             <Header/>
             <Main>
                 <Container>
-                    <Navbar/>
+                    <Navbar friends={props.state.sidebar.friends}/>
                     <MainContent state={props.state}
-                        // posts={props.state.profilePage.posts}
-                        // dialogs={props.state.dialogsPage.dialogs}
-                        // messages={props.state.dialogsPage.messages}
                     />
                 </Container>
             </Main>

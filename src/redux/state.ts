@@ -19,12 +19,15 @@ type DialogsPageType = {
     dialogs: DialogType[]
     messages: MessageType[]
 }
-// type SidebarType = {}
+
+type SidebarType = {
+    friends: DialogType[]
+}
 
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
-    // sidebar: SidebarType
+    sidebar: SidebarType
 }
 
 export let state: RootStateType = {
@@ -54,5 +57,11 @@ export let state: RootStateType = {
             {id: '5', message: 'YoYo!'},
         ]
     },
-    // sidebar: {}
+    sidebar: {
+        friends: [
+            {id: '1', name: 'Andrew'},
+            {id: '2', name: 'Sasha'},
+            {id: '3', name: 'Sveta'},
+        ]
+    }
 }
