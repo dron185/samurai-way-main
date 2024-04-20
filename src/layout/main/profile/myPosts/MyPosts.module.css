@@ -4,6 +4,14 @@
     flex-direction: column;
 }
 
+.postsTitle {
+    margin-bottom: 10px;
+}
+
+.postWrapper > * {
+    margin-bottom: 10px;
+}
+
 .posts {
     margin-top: 10px;
 }

@@ -8,6 +8,10 @@ import avatar from "../../../assets/images/avatar1.png";
 type DialogsPropsType = {
     dialogs: DialogType[]
     messages: MessageType[]
+
+    addMessage: () => void
+    updateNewMessageText: (newText: string) => void
+    newMessageText: string
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
@@ -16,11 +20,19 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     let messagesElements = props.messages.map(el =><div className={s.messageWrapper}><img className={s.avatar} src={avatar} alt="avatar"/><Message
         key={el.id} message={el.message}/></div>)
 
-    const newTextElement = React.createRef<HTMLTextAreaElement>();
+    const newMessageElement = React.createRef<HTMLTextAreaElement>();
+
     const addMessage = () => {
-        let text = newTextElement.current?.value;
-        alert(text);
+       props.addMessage();
     }
+
+    const onMessageChange = () => {
+        let text = newMessageElement.current?.value;
+        if (text !== undefined) {
+            props.updateNewMessageText(text)
+        }
+    }
+
 
     return (
         <div className={s.dialogs}>
@@ -31,7 +43,11 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
                 {messagesElements}
                 <div>
                     <div>
-                        <textarea ref={newTextElement}></textarea>
+                        <textarea
+                            ref={newMessageElement}
+                            onChange={onMessageChange}
+                            value={props.newMessageText}
+                        />
                     </div>
                     <div>
                         <button onClick={addMessage}>Add message</button>

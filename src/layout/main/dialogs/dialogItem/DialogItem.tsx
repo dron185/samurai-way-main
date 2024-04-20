@@ -4,7 +4,7 @@ import React from "react";
 import avatar from '../../../../assets/images/avatar1.png'
 
 type DialogItemPropsType = {
-    id: string
+    id: number
     name: string
 }
 
