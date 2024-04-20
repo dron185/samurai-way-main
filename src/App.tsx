@@ -6,15 +6,14 @@ import {Main} from "./layout/main/Main";
 import {Footer} from "./layout/footer/Footer";
 import {Container} from "./components/container/Container";
 import {MainContent} from "./layout/main/mainContent/MainContent";
-import {addMessage, RootStateType, updateNewMessageText} from "./redux/state";
+import {RootStateType} from "./redux/state";
 
 type AppPropsType = {
     state: RootStateType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-
-    addMessage: () => void
-    updateNewMessageText: (newText: string) => void
+    addPostCallback: (postText: string) => void
+    changeNewTextCallback: (newText: string) => void
+    addMessage: (messageText: string) => void
+    changeNewMessageCallback: (newText: string) => void
 }
 
 function App(props: AppPropsType) {
@@ -27,11 +26,11 @@ function App(props: AppPropsType) {
                     <Navbar friends={props.state.sidebar.friends}/>
                     <MainContent
                         state={props.state}
-                        addPost={props.addPost}
-                        updateNewPostText={props.updateNewPostText}
+                        addPostCallback={props.addPostCallback}
+                        changeNewTextCallback={props.changeNewTextCallback}
 
                         addMessage={props.addMessage}
-                        updateNewMessageText={props.updateNewMessageText}
+                        changeNewMessageCallback={props.changeNewMessageCallback}
                     />
                 </Container>
             </Main>

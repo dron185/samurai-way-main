@@ -15,7 +15,7 @@ export type PostType = {
 }
 
 export type ProfilePageType = {
-    posts: PostType[],
+    posts: PostType[]
     newPostText: string
 }
 type DialogsPageType = {
@@ -41,7 +41,7 @@ export let state: RootStateType = {
             {id: 3, message: "BlaBla", likesCount: 7},
             {id: 4, message: "DaDa", likesCount: 5},
         ],
-        newPostText: 'it-kamasutra.com'
+        newPostText: "",
     },
     dialogsPage: {
         dialogs: [
@@ -60,7 +60,7 @@ export let state: RootStateType = {
             {id: 5, message: 'Yo!'},
             {id: 6, message: 'YoYo!'},
         ],
-        newMessageText: 'new message'
+        newMessageText: "",
     },
     sidebar: {
         friends: [
@@ -71,34 +71,50 @@ export let state: RootStateType = {
     }
 }
 
-export const addPost = () => {
+// export const addPost = () => {
+//     const newPost: PostType = {
+//         // id: new Date().getTime(),
+//         id: 5,
+//         message: state.profilePage.newPostText,
+//         likesCount: 0,
+//     };
+//
+//     state.profilePage.posts.push(newPost);
+//     state.profilePage.newPostText = '';
+//     rerenderEntireTree(state);
+// }
+
+export const addPost = (postText: string) => {
     const newPost: PostType = {
         // id: new Date().getTime(),
         id: 5,
-        message: state.profilePage.newPostText,
+        message: postText,
         likesCount: 0,
     };
+
     state.profilePage.posts.push(newPost);
     state.profilePage.newPostText = '';
     rerenderEntireTree(state);
 }
 
-export const updateNewPostText = (newText: string) => {
+export const changeNewText = (newText: string) => {
     state.profilePage.newPostText = newText;
     rerenderEntireTree(state);
 }
 
-export const addMessage = () => {
+
+export const addMessage = (messageText: string) => {
     const newMessage: MessageType = {
         id: 7,
-        message: state.dialogsPage.newMessageText,
+        message: messageText,
     };
+
     state.dialogsPage.messages.push(newMessage);
     state.dialogsPage.newMessageText = '';
     rerenderEntireTree(state);
 }
 
-export const updateNewMessageText = (newText: string) => {
+export const changeNewMessage = (newText: string) => {
     state.dialogsPage.newMessageText = newText;
     rerenderEntireTree(state);
 }

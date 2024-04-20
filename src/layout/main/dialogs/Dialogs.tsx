@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from "./dialogItem/DialogItem";
 import {Message} from "./message/Message";
@@ -8,9 +8,8 @@ import avatar from "../../../assets/images/avatar1.png";
 type DialogsPropsType = {
     dialogs: DialogType[]
     messages: MessageType[]
-
-    addMessage: () => void
-    updateNewMessageText: (newText: string) => void
+    addMessage: (messageText: string) => void
+    changeNewMessageCallback: (newText: string) => void
     newMessageText: string
 }
 
@@ -20,17 +19,13 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     let messagesElements = props.messages.map(el =><div className={s.messageWrapper}><img className={s.avatar} src={avatar} alt="avatar"/><Message
         key={el.id} message={el.message}/></div>)
 
-    const newMessageElement = React.createRef<HTMLTextAreaElement>();
 
     const addMessage = () => {
-       props.addMessage();
+       props.addMessage(props.newMessageText);
     }
 
-    const onMessageChange = () => {
-        let text = newMessageElement.current?.value;
-        if (text !== undefined) {
-            props.updateNewMessageText(text)
-        }
+    const newMessageChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.changeNewMessageCallback(e.currentTarget.value);
     }
 
 
@@ -44,8 +39,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
                 <div>
                     <div>
                         <textarea
-                            ref={newMessageElement}
-                            onChange={onMessageChange}
+                            onChange={newMessageChangeHandler}
                             value={props.newMessageText}
                         />
                     </div>
