@@ -1,4 +1,4 @@
-import {rerenderEntireTree} from "../render";
+import {rerenderEntireTree} from "../index";
 
 export type MessageType = {
     id: number
