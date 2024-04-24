@@ -12,7 +12,7 @@ type MainContentPropsType = {
     state: RootStateType
     addPostCallback: (postText: string) => void
     changeNewTextCallback: (newText: string) => void
-    addMessage: (messageText: string) => void
+    addMessageCallback: (messageText: string) => void
     changeNewMessageCallback: (newText: string) => void
 }
 
@@ -24,7 +24,7 @@ export const MainContent: React.FC<MainContentPropsType> = (props) => {
                 dialogs={props.state.dialogsPage.dialogs}
                 messages={props.state.dialogsPage.messages}
                 newMessageText={props.state.dialogsPage.newMessageText}
-                addMessage={props.addMessage}
+                addMessage={props.addMessageCallback}
                 changeNewMessageCallback={props.changeNewMessageCallback}
             />}/>
             <Route path={'/profile'} render={()=>

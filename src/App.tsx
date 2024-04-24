@@ -6,31 +6,32 @@ import {Main} from "./layout/main/Main";
 import {Footer} from "./layout/footer/Footer";
 import {Container} from "./components/container/Container";
 import {MainContent} from "./layout/main/mainContent/MainContent";
-import {RootStateType} from "./redux/state";
+import {StoreType} from "./redux/state";
 
 type AppPropsType = {
-    state: RootStateType
-    addPostCallback: (postText: string) => void
-    changeNewTextCallback: (newText: string) => void
-    addMessage: (messageText: string) => void
-    changeNewMessageCallback: (newText: string) => void
+    // state: RootStateType
+    // addPostCallback: (postText: string) => void
+    // changeNewTextCallback: (newText: string) => void
+    // addMessage: (messageText: string) => void
+    // changeNewMessageCallback: (newText: string) => void
+    store: StoreType
 }
 
 function App(props: AppPropsType) {
+    const state = props.store.getState();
 
     return (
         <div className="app-wrapper">
             <Header/>
             <Main>
                 <Container>
-                    <Navbar friends={props.state.sidebar.friends}/>
+                    <Navbar friends={state.sidebar.friends}/>
                     <MainContent
-                        state={props.state}
-                        addPostCallback={props.addPostCallback}
-                        changeNewTextCallback={props.changeNewTextCallback}
-
-                        addMessage={props.addMessage}
-                        changeNewMessageCallback={props.changeNewMessageCallback}
+                        state={state}
+                        addPostCallback={props.store.addPost.bind(props.store)}
+                        changeNewTextCallback={props.store.changeNewText.bind(props.store)}
+                        addMessageCallback={props.store.addMessage.bind(props.store)}
+                        changeNewMessageCallback={props.store.changeNewMessage.bind(props.store)}
                     />
                 </Container>
             </Main>

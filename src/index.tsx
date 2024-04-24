@@ -1,5 +1,4 @@
-import {addMessage, addPost, changeNewMessage, changeNewText, RootStateType, state} from "./redux/state";
-
+import store, {RootStateType} from "./redux/state";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -10,16 +9,17 @@ export const rerenderEntireTree = (state: RootStateType) => {
     ReactDOM.render(
         <BrowserRouter>
             <App
-                state={state}
-                addPostCallback={addPost}
-                changeNewTextCallback={changeNewText}
-                addMessage={addMessage}
-                changeNewMessageCallback={changeNewMessage}
+                store={store}
+                // state={state}
+                // addPostCallback={addPost}
+                // changeNewTextCallback={changeNewText}
+                // addMessage={addMessage}
+                // changeNewMessageCallback={changeNewMessage}
             />
         </BrowserRouter>,
         document.getElementById('root')
     );
 }
 
-rerenderEntireTree(state);
-
+store.subscribe(rerenderEntireTree);
+rerenderEntireTree(store.getState());
