@@ -116,37 +116,46 @@ export const subscribe = (observer: any) => {
 
 export type StoreType = {
     _state: RootStateType
-    changeNewText: (newText: string) => void
-    addPost: (postText: string) => void
-    addMessage: (messageText: string) => void
-    changeNewMessage: (newText: string) => void
     _callSubscriber: (_state: RootStateType) => void
     subscribe: (callback: (_state: RootStateType) => void) => void
     getState: () => RootStateType
     dispatch: (action: ActionsType) => void
 }
 
-type AddPostActionType = {
-    type: 'ADD-POST',
-    postText: string
+// type AddPostActionType = {
+//     type: 'ADD-POST',
+//     postText: string
+// }
+
+
+export type ActionsType =
+    | ReturnType<typeof addPostAC>
+    | ReturnType<typeof changeNewTextAC>
+    | ReturnType<typeof addMessageAC>
+    | ReturnType<typeof changeNewMessageAC>
+
+export const addPostAC = (postText: string) => ({ type: 'ADD-POST', postText: postText} as const)
+
+export const changeNewTextAC = (newText: string) => {
+    return {
+        type: 'CHANGE-NEW-TEXT',
+        newText: newText,
+    } as const
 }
 
-type ChangeNewTextActionType = {
-    type: 'CHANGE-NEW-TEXT',
-    newText: string
+export const addMessageAC = (messageText: string) => {
+    return {
+        type: 'ADD-MESSAGE',
+        messageText: messageText,
+    } as const
 }
 
-type AddMessageActionType = {
-    type: 'ADD-MESSAGE',
-    messageText: string
+export const changeNewMessageAC = (newText: string) => {
+    return {
+        type: 'CHANGE-NEW-MESSAGE',
+        newText: newText,
+    } as const
 }
-
-type ChangeNewMessageActionType = {
-    type: 'CHANGE-NEW-MESSAGE',
-    newText: string
-}
-
-export type ActionsType = AddPostActionType | ChangeNewTextActionType | AddMessageActionType | ChangeNewMessageActionType
 
 const store: StoreType = {
     _state: {
@@ -186,51 +195,21 @@ const store: StoreType = {
             ]
         }
     },
-    _callSubscriber (_state: RootStateType) {
+    _callSubscriber(_state: RootStateType) {
         console.log("state is changed")
     },
 
-    getState () {
+    getState() {
         return this._state;
     },
-    subscribe (callback) {
+    subscribe(callback) {
         this._callSubscriber = callback;
     },
 
-    addPost (postText: string) {
-        const newPost: PostType = {
-            id: new Date().getTime(),
-            // id: 5,
-            message: postText,
-            likesCount: 0,
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber(this._state);
-    },
-    changeNewText (newText: string) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
-    addMessage(messageText: string) {
-        const newMessage: MessageType = {
-            id: 7,
-            message: messageText,
-        };
-        this._state.dialogsPage.messages.push(newMessage);
-        this._state.dialogsPage.newMessageText = '';
-        this._callSubscriber(this._state);
-    },
-    changeNewMessage (newText: string) {
-        this._state.dialogsPage.newMessageText = newText;
-        this._callSubscriber(this._state);
-    },
-
-    dispatch (action) {
+    dispatch(action) {
         if (action.type === 'ADD-POST') {
             const newPost: PostType = {
                 id: new Date().getTime(),
-                // id: 5,
                 message: action.postText,
                 likesCount: 0,
             };

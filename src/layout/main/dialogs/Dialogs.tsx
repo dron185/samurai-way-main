@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from "./dialogItem/DialogItem";
 import {Message} from "./message/Message";
-import {ActionsType, DialogType, MessageType} from "../../../redux/state";
+import {ActionsType, addMessageAC, changeNewMessageAC, DialogType, MessageType} from "../../../redux/state";
 import avatar from "../../../assets/images/avatar1.png";
 
 type DialogsPropsType = {
@@ -24,14 +24,13 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     const addMessage = () => {
        // props.addMessage(props.newMessageText);
-        props.dispatch({type: "ADD-MESSAGE", messageText: props.newMessageText});
+        props.dispatch(addMessageAC(props.newMessageText));
     }
 
     const newMessageChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         // props.changeNewMessageCallback(e.currentTarget.value);
-        props.dispatch({type: "CHANGE-NEW-MESSAGE", newText: e.currentTarget.value});
+        props.dispatch(changeNewMessageAC(e.currentTarget.value));
     }
-
 
     return (
         <div className={s.dialogs}>
