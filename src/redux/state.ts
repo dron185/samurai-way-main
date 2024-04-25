@@ -123,7 +123,30 @@ export type StoreType = {
     _callSubscriber: (_state: RootStateType) => void
     subscribe: (callback: (_state: RootStateType) => void) => void
     getState: () => RootStateType
+    dispatch: (action: ActionsType) => void
 }
+
+type AddPostActionType = {
+    type: 'ADD-POST',
+    postText: string
+}
+
+type ChangeNewTextActionType = {
+    type: 'CHANGE-NEW-TEXT',
+    newText: string
+}
+
+type AddMessageActionType = {
+    type: 'ADD-MESSAGE',
+    messageText: string
+}
+
+type ChangeNewMessageActionType = {
+    type: 'CHANGE-NEW-MESSAGE',
+    newText: string
+}
+
+export type ActionsType = AddPostActionType | ChangeNewTextActionType | AddMessageActionType | ChangeNewMessageActionType
 
 const store: StoreType = {
     _state: {
@@ -163,19 +186,30 @@ const store: StoreType = {
             ]
         }
     },
-    changeNewText (newText: string) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
+    _callSubscriber (_state: RootStateType) {
+        console.log("state is changed")
     },
+
+    getState () {
+        return this._state;
+    },
+    subscribe (callback) {
+        this._callSubscriber = callback;
+    },
+
     addPost (postText: string) {
         const newPost: PostType = {
-            // id: new Date().getTime(),
-            id: 5,
+            id: new Date().getTime(),
+            // id: 5,
             message: postText,
             likesCount: 0,
         };
         this._state.profilePage.posts.push(newPost);
         this._state.profilePage.newPostText = '';
+        this._callSubscriber(this._state);
+    },
+    changeNewText (newText: string) {
+        this._state.profilePage.newPostText = newText;
         this._callSubscriber(this._state);
     },
     addMessage(messageText: string) {
@@ -191,16 +225,34 @@ const store: StoreType = {
         this._state.dialogsPage.newMessageText = newText;
         this._callSubscriber(this._state);
     },
-    _callSubscriber (_state: RootStateType) {
-        console.log("state is changed")
-    },
-    subscribe (callback) {
-        this._callSubscriber = callback;
-    },
-    getState () {
-        return this._state;
+
+    dispatch (action) {
+        if (action.type === 'ADD-POST') {
+            const newPost: PostType = {
+                id: new Date().getTime(),
+                // id: 5,
+                message: action.postText,
+                likesCount: 0,
+            };
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber(this._state);
+        } else if (action.type === 'CHANGE-NEW-TEXT') {
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        } else if (action.type === 'ADD-MESSAGE') {
+            const newMessage: MessageType = {
+                id: new Date().getTime(),
+                message: action.messageText,
+            };
+            this._state.dialogsPage.messages.push(newMessage);
+            this._state.dialogsPage.newMessageText = '';
+            this._callSubscriber(this._state);
+        } else if (action.type === 'CHANGE-NEW-MESSAGE') {
+            this._state.dialogsPage.newMessageText = action.newText;
+            this._callSubscriber(this._state);
+        }
     }
 }
 
 export default store;
-// window.store = store;

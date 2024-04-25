@@ -28,10 +28,11 @@ function App(props: AppPropsType) {
                     <Navbar friends={state.sidebar.friends}/>
                     <MainContent
                         state={state}
-                        addPostCallback={props.store.addPost.bind(props.store)}
-                        changeNewTextCallback={props.store.changeNewText.bind(props.store)}
-                        addMessageCallback={props.store.addMessage.bind(props.store)}
-                        changeNewMessageCallback={props.store.changeNewMessage.bind(props.store)}
+                        dispatch={props.store.dispatch.bind(props.store)}
+                        // addPostCallback={props.store.addPost.bind(props.store)}
+                        // changeNewTextCallback={props.store.changeNewText.bind(props.store)}
+                        // addMessageCallback={props.store.addMessage.bind(props.store)}
+                        // changeNewMessageCallback={props.store.changeNewMessage.bind(props.store)}
                     />
                 </Container>
             </Main>

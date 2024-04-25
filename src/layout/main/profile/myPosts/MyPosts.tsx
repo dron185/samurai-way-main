@@ -1,14 +1,16 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import {Post} from './post/Post'
-import {PostType} from "../../../../redux/state";
+import {ActionsType, PostType} from "../../../../redux/state";
 
 type MyPostsPropsType = {
     posts: PostType[]
     newPostText: string
-    addPostCallback: (postText: string) => void
     // updateNewPostText: (newText: string) => void
-    changeNewTextCallback: (newText: string) => void
+
+    // addPostCallback: (postText: string) => void
+    // changeNewTextCallback: (newText: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
@@ -18,7 +20,9 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     // const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const addPost = () => {
-        props.addPostCallback(props.newPostText);
+        // props.addPostCallback(props.newPostText);
+        let action: ActionsType = {type: 'ADD-POST', postText: props.newPostText};
+        props.dispatch(action);
     }
 
     // const onPostChange = () => {
@@ -30,7 +34,8 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement> ) => {
         let text = e.currentTarget.value;
-        props.changeNewTextCallback(text)
+        // props.changeNewTextCallback(text)
+        props.dispatch({type: "CHANGE-NEW-TEXT", newText: text});
     }
 
     return (
