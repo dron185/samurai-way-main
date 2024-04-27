@@ -8,10 +8,7 @@ import avatar from "../../../assets/images/avatar1.png";
 type DialogsPropsType = {
     dialogs: DialogType[]
     messages: MessageType[]
-
     dispatch: (action: ActionsType) => void
-    // addMessage: (messageText: string) => void
-    // changeNewMessageCallback: (newText: string) => void
     newMessageText: string
 }
 
@@ -23,12 +20,10 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
 
     const addMessage = () => {
-       // props.addMessage(props.newMessageText);
         props.dispatch(addMessageAC(props.newMessageText));
     }
 
     const newMessageChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        // props.changeNewMessageCallback(e.currentTarget.value);
         props.dispatch(changeNewMessageAC(e.currentTarget.value));
     }
 

@@ -5,17 +5,10 @@ import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
 
-export const rerenderEntireTree = (state: RootStateType) => {
+const rerenderEntireTree = (state: RootStateType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App
-                store={store}
-                // state={state}
-                // addPostCallback={addPost}
-                // changeNewTextCallback={changeNewText}
-                // addMessage={addMessage}
-                // changeNewMessageCallback={changeNewMessage}
-            />
+            <App store={store}/>
         </BrowserRouter>,
         document.getElementById('root')
     );

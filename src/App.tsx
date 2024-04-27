@@ -9,11 +9,6 @@ import {MainContent} from "./layout/main/mainContent/MainContent";
 import {StoreType} from "./redux/state";
 
 type AppPropsType = {
-    // state: RootStateType
-    // addPostCallback: (postText: string) => void
-    // changeNewTextCallback: (newText: string) => void
-    // addMessage: (messageText: string) => void
-    // changeNewMessageCallback: (newText: string) => void
     store: StoreType
 }
 
@@ -29,10 +24,6 @@ function App(props: AppPropsType) {
                     <MainContent
                         state={state}
                         dispatch={props.store.dispatch.bind(props.store)}
-                        // addPostCallback={props.store.addPost.bind(props.store)}
-                        // changeNewTextCallback={props.store.changeNewText.bind(props.store)}
-                        // addMessageCallback={props.store.addMessage.bind(props.store)}
-                        // changeNewMessageCallback={props.store.changeNewMessage.bind(props.store)}
                     />
                 </Container>
             </Main>

@@ -31,7 +31,6 @@ export type RootStateType = {
     sidebar: SidebarType
 }
 
-
 /*let rerenderEntireTree = (state: RootStateType) => {
     console.log("state is changed")
 }
@@ -114,6 +113,11 @@ export const subscribe = (observer: any) => {
 }*/
 
 
+// type AddPostActionType = {
+//     type: 'ADD-POST',
+//     postText: string
+// }
+
 export type StoreType = {
     _state: RootStateType
     _callSubscriber: (_state: RootStateType) => void
@@ -121,12 +125,6 @@ export type StoreType = {
     getState: () => RootStateType
     dispatch: (action: ActionsType) => void
 }
-
-// type AddPostActionType = {
-//     type: 'ADD-POST',
-//     postText: string
-// }
-
 
 export type ActionsType =
     | ReturnType<typeof addPostAC>
@@ -195,7 +193,8 @@ const store: StoreType = {
             ]
         }
     },
-    _callSubscriber(_state: RootStateType) {
+    _callSubscriber() {
+    // _callSubscriber(_state: RootStateType) {
         console.log("state is changed")
     },
 
