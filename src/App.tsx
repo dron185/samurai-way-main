@@ -24,7 +24,7 @@ function App(props: AppPropsType) {
                     <Navbar friends={props.state.sidebar.friends}/>
                     <MainContent
                         state={props.state}
-                        dispatch={props.store.dispatch.bind(props.store)}
+                        dispatch={props.store.dispatch.bind(props.store)} //биндим на этот store - чтобы внутри dispatch this был-store
                     />
                 </Container>
             </Main>
