@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from "./dialogItem/DialogItem";
 import {Message} from "./message/Message";
-import {ActionsType, DialogType, MessageType} from "../../../redux/state";
+import {ActionsType, DialogType, MessageType} from "../../../redux/store";
 import avatar from "../../../assets/images/avatar1.png";
 import {addMessageAC, changeNewMessageAC} from "../../../redux/dialogs-reducer";
 

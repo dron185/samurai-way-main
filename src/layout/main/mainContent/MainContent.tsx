@@ -6,7 +6,7 @@ import {News} from "../news/News";
 import {Music} from "../music/Music";
 import {Settings} from "../settings/Settings";
 import s from './MainContent.module.css'
-import {ActionsType, RootStateType} from "../../../redux/state";
+import {ActionsType, RootStateType} from "../../../redux/store";
 
 type MainContentPropsType = {
     state: RootStateType

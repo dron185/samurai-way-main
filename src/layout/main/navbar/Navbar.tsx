@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
-import {DialogType} from "../../../redux/state";
+import {DialogType} from "../../../redux/store";
 import avatar from '../../../assets/images/avatar2.png'
 
 type NavbarPropsType = {

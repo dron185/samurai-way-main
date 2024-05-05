@@ -6,11 +6,12 @@ import {Main} from "./layout/main/Main";
 import {Footer} from "./layout/footer/Footer";
 import {Container} from "./components/container/Container";
 import {MainContent} from "./layout/main/mainContent/MainContent";
-import {RootStateType, StoreType} from "./redux/state";
+import {ReducersStateType} from "./redux/redux-store";
+//import {RootStateType, StoreType} from "./redux/store";
 
 type AppPropsType = {
-    store: StoreType
-    state: RootStateType
+    store: any // - типизировать!!!
+    state: ReducersStateType
 }
 
 function App(props: AppPropsType) {
