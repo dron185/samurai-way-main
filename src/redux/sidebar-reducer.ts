@@ -1,4 +1,12 @@
-import {ActionsType, SidebarType} from "./store";
+
+export type DialogType = {
+    id: number
+    name: string
+}
+
+export type SidebarType = {
+    friends: DialogType[]
+}
 
 let initialSidebarState: SidebarType = {
     friends: [
@@ -8,7 +16,7 @@ let initialSidebarState: SidebarType = {
     ]
 }
 
-const sidebarReducer = (state = initialSidebarState, action: ActionsType) => {
+const sidebarReducer = (state = initialSidebarState, action: any) => {
     return state;
 }
 

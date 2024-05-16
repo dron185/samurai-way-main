@@ -1,14 +1,15 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
-import {DialogType} from "../../../redux/store";
 import avatar from '../../../assets/images/avatar2.png'
+import {useSelector} from "react-redux";
+import {ReducersStateType} from "../../../redux/redux-store";
+import {DialogType} from "../../../redux/dialogs-reducer";
 
-type NavbarPropsType = {
-    friends: DialogType[]
-}
 
-export const Navbar: React.FC<NavbarPropsType> = (props) => {
+export const Navbar: React.FC = () => {
+    const friends = useSelector<ReducersStateType, DialogType[]>(state => state.sidebar.friends)
+
     return (
         <div>
             <nav className={s.nav}>
@@ -34,7 +35,7 @@ export const Navbar: React.FC<NavbarPropsType> = (props) => {
             <div className={s.friends}>
                 <h3 className={s.friendsTitle}>Friends</h3>
                 <div className={s.friendsContainer}>
-                    {props.friends.map(friend =>
+                    {friends.map(friend =>
                         <div key={friend.id} className={s.friend}>
                             <img className={s.avatar} src={avatar} alt="friend"/>
                             <div className={s.name}>{friend.name}</div>

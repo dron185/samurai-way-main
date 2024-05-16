@@ -2,30 +2,36 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from "./dialogItem/DialogItem";
 import {Message} from "./message/Message";
-import {ActionsType, DialogType, MessageType} from "../../../redux/store";
 import avatar from "../../../assets/images/avatar1.png";
-import {addMessageAC, changeNewMessageAC} from "../../../redux/dialogs-reducer";
+import {
+    addMessageAC,
+    changeNewMessageAC,
+    DialogType,
+    MessageType,
+    newMessageTextType
+} from "../../../redux/dialogs-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {ReducersStateType} from "../../../redux/redux-store";
 
-type DialogsPropsType = {
-    dialogs: DialogType[]
-    messages: MessageType[]
-    dispatch: (action: ActionsType) => void
-    newMessageText: string
-}
 
-export const Dialogs: React.FC<DialogsPropsType> = (props) => {
+export const Dialogs: React.FC/*<DialogsPropsType>*/ = () => {
+    const dialogs = useSelector<ReducersStateType, DialogType[]>(state => state.dialogsPage.dialogs);
+    const messages = useSelector<ReducersStateType, MessageType[]>(state => state.dialogsPage.messages)
+    const newMessageText = useSelector<ReducersStateType, newMessageTextType>(state => state.dialogsPage.newMessageText)
 
-    let dialogsElements = props.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
-    let messagesElements = props.messages.map(el =><div className={s.messageWrapper}><img className={s.avatar} src={avatar} alt="avatar"/><Message
+    const dispatch = useDispatch();
+
+    let dialogsElements = dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
+    let messagesElements = messages.map(el =><div className={s.messageWrapper}><img className={s.avatar} src={avatar} alt="avatar"/><Message
         key={el.id} message={el.message}/></div>)
 
 
     const addMessageHandler = () => {
-        props.dispatch(addMessageAC(props.newMessageText));
+        dispatch(addMessageAC(newMessageText));
     }
 
     const newMessageChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changeNewMessageAC(e.currentTarget.value));
+        dispatch(changeNewMessageAC(e.currentTarget.value));
     }
 
     return (
@@ -40,7 +46,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
                         <textarea
                             placeholder={"Enter your message"}
                             onChange={newMessageChangeHandler}
-                            value={props.newMessageText}
+                            value={newMessageText}
                         />
                     </div>
                     <div>

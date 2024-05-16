@@ -1,4 +1,3 @@
-import {RootStateType} from "./redux/store";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -6,19 +5,24 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 
 import {store} from './redux/redux-store';
+import {Provider} from "react-redux";
 
-const rerenderEntireTree = (state: RootStateType) => {
+const rerenderEntireTree = (/*state: ReducersStateType*/) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App store={store} state={state}/>
+            <Provider store={store}>
+                 <App/>
+            </Provider>
         </BrowserRouter>,
         document.getElementById('root')
     );
 }
 
-rerenderEntireTree(store.getState());
+rerenderEntireTree(/*store.getState()*/);
 
 store.subscribe(()=>{
-    let state = store.getState();
-    rerenderEntireTree(state);
+    /*let state = store.getState();
+    console.log(state)*/
+    rerenderEntireTree(/*state*/);
 });
+

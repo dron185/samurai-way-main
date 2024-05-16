@@ -15,3 +15,4 @@ let reducers = combineReducers({
 export type ReducersStateType = ReturnType<typeof reducers>
 
 export let store = createStore(reducers); //создает внутри себя стейт у которого есть 3 свойства(profilePage, dialogsPage, sidebar)
+
