@@ -1,27 +1,29 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import {Post} from './post/Post'
-import {addPostAC, changeNewTextAC, newPostTextType, PostType} from "../../../../redux/profile-reducer";
-import {useDispatch, useSelector} from "react-redux";
-import {ReducersStateType} from "../../../../redux/redux-store";
+import {newPostTextType, PostType} from "../../../../redux/profile-reducer";
 
+type MyPostsPropsType = {
+    changeNewText: (text: string) => void
+    addNewPost: () => void
+    posts: PostType[]
+    newPostText: newPostTextType
+}
 
-export const MyPosts: React.FC = () => {
-    const posts = useSelector<ReducersStateType, PostType[]>(state => state.profilePage.posts);
-    const newPostText = useSelector<ReducersStateType ,newPostTextType>(state => state.profilePage.newPostText)
-    const dispatch = useDispatch();
+//Презентационные компоненты занимаются отображением UI.
 
+export const MyPosts = ({changeNewText, posts, newPostText, addNewPost} : MyPostsPropsType) => {
 
     const postsElements = posts.map(el =>
         <Post key={el.id} message={el.message} likesCount={el.likesCount}/>)
 
-    const addPost = () => {
-        dispatch(addPostAC(newPostText));
+    const onAddPost = () => {
+        addNewPost();
     }
 
-    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement> ) => {
+    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement> ) => {
         let text = e.currentTarget.value;
-        dispatch(changeNewTextAC(text));
+        changeNewText(text)
     }
 
     return (
@@ -30,12 +32,12 @@ export const MyPosts: React.FC = () => {
             <div className={s.postWrapper}>
                 <div>
                     <textarea
-                        onChange={newTextChangeHandler}
+                        onChange={onPostChange}
                         value={newPostText}
                     />
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
                 {/*<button>Remove</button>*/}
             </div>

@@ -7,7 +7,7 @@ import {BrowserRouter} from "react-router-dom";
 import {store} from './redux/redux-store';
 import {Provider} from "react-redux";
 
-const rerenderEntireTree = (/*state: ReducersStateType*/) => {
+const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
@@ -18,11 +18,9 @@ const rerenderEntireTree = (/*state: ReducersStateType*/) => {
     );
 }
 
-rerenderEntireTree(/*store.getState()*/);
+rerenderEntireTree();
 
 store.subscribe(()=>{
-    /*let state = store.getState();
-    console.log(state)*/
-    rerenderEntireTree(/*state*/);
+    rerenderEntireTree();
 });
 
