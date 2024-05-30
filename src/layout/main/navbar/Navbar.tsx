@@ -3,12 +3,12 @@ import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
 import avatar from '../../../assets/images/avatar2.png'
 import {useSelector} from "react-redux";
-import {ReducersStateType} from "../../../redux/redux-store";
+import {AppStateType} from "../../../redux/redux-store";
 import {DialogType} from "../../../redux/dialogs-reducer";
 
 
 export const Navbar: React.FC = () => {
-    const friends = useSelector<ReducersStateType, DialogType[]>(state => state.sidebar.friends)
+    const friends = useSelector<AppStateType, DialogType[]>(state => state.sidebar.friends)
 
     return (
         <div>

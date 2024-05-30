@@ -25,7 +25,7 @@ let initialProfileState: ProfilePageType = {
         newPostText: "",
     }
 
-const profileReducer = (state = initialProfileState, action: ActionsType) => {
+const profileReducer = (state: ProfilePageType = initialProfileState, action: ActionsType): ProfilePageType => {
 
     switch (action.type) {
         case 'ADD-POST':
@@ -34,12 +34,16 @@ const profileReducer = (state = initialProfileState, action: ActionsType) => {
                 message: action.postText,
                 likesCount: 0,
             };
-            state.posts.push(newPost);
-            state.newPostText = '';
-            return state;
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: ''
+            }
         case 'CHANGE-NEW-TEXT':
-            state.newPostText = action.newText;
-            return state;
+            return {
+                ...state,
+                newPostText: action.newText,
+            }
         default:
             return state;
     }

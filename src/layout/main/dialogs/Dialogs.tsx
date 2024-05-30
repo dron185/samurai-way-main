@@ -3,17 +3,17 @@ import s from './Dialogs.module.css'
 import {DialogItem} from "./dialogItem/DialogItem";
 import {Message} from "./message/Message";
 import avatar from "../../../assets/images/avatar1.png";
-import {DialogType, MessageType, newMessageTextType} from "../../../redux/dialogs-reducer";
+import {SuperDialogsPropsType} from "./NewDialogsContainer";
 
-type DialogsPropsType = {
-    dialogs: DialogType[]
-    messages: MessageType[]
-    newMessageText: newMessageTextType
-    addMessage: () => void
-    newMessageChange: (value: string) => void
-}
+// type DialogsPropsType = {
+//     dialogs: DialogType[]
+//     messages: MessageType[]
+//     newMessageText: newMessageTextType
+//     addMessage: (text: newMessageTextType) => void
+//     newMessageChange: (value: string) => void
+// }
 
-export const Dialogs: React.FC<DialogsPropsType> = (props) => {
+export const Dialogs: React.FC<SuperDialogsPropsType> = (props) => {
 
     let dialogsElements = props.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
     let messagesElements = props.messages.map(el => <div className={s.messageWrapper}><img className={s.avatar}
@@ -23,7 +23,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
 
     const onSendMessageClick = () => {
-        props.addMessage()
+        props.addMessage(props.newMessageText)
     }
 
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -54,3 +54,4 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
         </div>
     );
 };
+

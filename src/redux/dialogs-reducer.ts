@@ -40,20 +40,29 @@ let initialDialogsState: DialogsPageType = {
     newMessageText: "",
 }
 
-const dialogsReducer = (state = initialDialogsState, action: ActionsType) => {
+const dialogsReducer = (state: DialogsPageType = initialDialogsState, action: ActionsType): DialogsPageType => {
 
     switch (action.type) {
         case 'CHANGE-NEW-MESSAGE':
-            state.newMessageText = action.newText;
-            return state;
+            // state.newMessageText = action.newText;
+            // return state;
+            return {
+                ...state,
+                newMessageText: action.newText
+            }
         case 'ADD-MESSAGE':
             const newMessage: MessageType = {
                 id: new Date().getTime(),
                 message: action.messageText,
             };
-            state.messages.push(newMessage);
-            state.newMessageText = '';
-            return state;
+            // state.messages.push(newMessage);
+            // state.newMessageText = '';
+            // return state;
+            return {
+                ...state,
+                messages: [...state.messages, newMessage],
+                newMessageText: ""
+            }
         default:
             return state;
     }
@@ -74,3 +83,5 @@ export const addMessageAC = (messageText: string) => {
 }
 
 export default dialogsReducer;
+
+

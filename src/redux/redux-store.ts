@@ -5,14 +5,14 @@ import sidebarReducer from "./sidebar-reducer";
 
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer
 })
 
 // определить автоматически тип всего объекта состояния
-export type ReducersStateType = ReturnType<typeof reducers>
+export type AppStateType = ReturnType<typeof rootReducer>
 
-export let store = createStore(reducers); //создает внутри себя стейт у которого есть 3 свойства(profilePage, dialogsPage, sidebar)
+export let store = createStore(rootReducer); //создает внутри себя стейт у которого есть 3 свойства(profilePage, dialogsPage, sidebar)
 
