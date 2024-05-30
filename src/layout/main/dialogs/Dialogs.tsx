@@ -5,22 +5,15 @@ import {Message} from "./message/Message";
 import avatar from "../../../assets/images/avatar1.png";
 import {SuperDialogsPropsType} from "./NewDialogsContainer";
 
-// type DialogsPropsType = {
-//     dialogs: DialogType[]
-//     messages: MessageType[]
-//     newMessageText: newMessageTextType
-//     addMessage: (text: newMessageTextType) => void
-//     newMessageChange: (value: string) => void
-// }
-
 export const Dialogs: React.FC<SuperDialogsPropsType> = (props) => {
 
     let dialogsElements = props.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
-    let messagesElements = props.messages.map(el => <div className={s.messageWrapper}><img className={s.avatar}
-                                                                                           src={avatar}
-                                                                                           alt="avatar"/><Message
-        key={el.id} message={el.message}/></div>)
-
+    let messagesElements = props.messages.map(el =>
+        <div className={s.messageWrapper} key={el.id}>
+            <img className={s.avatar} src={avatar} alt="avatar"/>
+            <Message message={el.message}/>
+        </div>
+    )
 
     const onSendMessageClick = () => {
         props.addMessage(props.newMessageText)

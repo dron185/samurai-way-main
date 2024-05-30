@@ -27,6 +27,7 @@ type MapDispatchToPropsType = {
 
 export type SuperDialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
+// каждый раз как в стейте происходят изменения-запускается эта функция:
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         dialogs: state.dialogsPage.dialogs,
