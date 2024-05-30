@@ -16,3 +16,6 @@ export type AppStateType = ReturnType<typeof rootReducer>
 
 export let store = createStore(rootReducer); //создает внутри себя стейт у которого есть 3 свойства(profilePage, dialogsPage, sidebar)
 
+// @ts-ignore
+window.store = store;
+
