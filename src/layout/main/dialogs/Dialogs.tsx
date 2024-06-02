@@ -3,9 +3,9 @@ import s from './Dialogs.module.css'
 import {DialogItem} from "./dialogItem/DialogItem";
 import {Message} from "./message/Message";
 import avatar from "../../../assets/images/avatar1.png";
-import {SuperDialogsPropsType} from "./NewDialogsContainer";
+import {NewDialogsPropsType} from "./NewDialogsContainer";
 
-export const Dialogs: React.FC<SuperDialogsPropsType> = (props) => {
+export const Dialogs: React.FC<NewDialogsPropsType> = (props) => {
 
     let dialogsElements = props.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
     let messagesElements = props.messages.map(el =>

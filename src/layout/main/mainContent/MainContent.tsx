@@ -6,6 +6,7 @@ import {Music} from "../music/Music";
 import {Settings} from "../settings/Settings";
 import s from './MainContent.module.css'
 import {NewDialogsContainer} from "../dialogs/NewDialogsContainer";
+import {UsersContainer} from "../users/UsersContainer";
 
 export const MainContent: React.FC = () => {
     return (
@@ -16,6 +17,7 @@ export const MainContent: React.FC = () => {
             <Route path={'/news'} component={News}/>
             <Route path={'/music'} component={Music}/>
             <Route path={'/settings'} component={Settings}/>
+            <Route path={'/users'} render={()=><UsersContainer/>}/>
         </div>
     );
 };

@@ -44,8 +44,6 @@ const dialogsReducer = (state: DialogsPageType = initialDialogsState, action: Ac
 
     switch (action.type) {
         case 'CHANGE-NEW-MESSAGE':
-            // state.newMessageText = action.newText;
-            // return state;
             return {
                 ...state,
                 newMessageText: action.newText
@@ -55,9 +53,6 @@ const dialogsReducer = (state: DialogsPageType = initialDialogsState, action: Ac
                 id: new Date().getTime(),
                 message: action.messageText,
             };
-            // state.messages.push(newMessage);
-            // state.newMessageText = '';
-            // return state;
             return {
                 ...state,
                 messages: [...state.messages, newMessage],
