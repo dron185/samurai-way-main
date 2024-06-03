@@ -7,13 +7,25 @@ type LocationType = {
     country: string
 }
 
+// export type UserType = {
+//     id: number
+//     photoUrl: string
+//     followed: boolean
+//     name: string
+//     status: string
+//     location: LocationType
+// }
+
 export type UserType = {
+    name: string
     id: number
-    photoUrl: string
+    uniqueUrlName: string
+    photos : {
+        small: string
+        large: string
+    }
     followed: boolean
-    fullName: string
     status: string
-    location: LocationType
 }
 
 export type UsersPageType = {
