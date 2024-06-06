@@ -4,3 +4,13 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
+.page {
+    cursor: pointer;
+    margin: 10px;
+}
+
+.selectedPage {
+    color: #ffffff;
+    font-weight: bold;
+}

@@ -2,10 +2,10 @@ import photo1 from '../assets/images/avatar4.png'
 import photo2 from '../assets/images/avatar5.png'
 import photo3 from '../assets/images/avatar6.png'
 
-type LocationType = {
-    city: string
-    country: string
-}
+// type LocationType = {
+//     city: string
+//     country: string
+// }
 
 // export type UserType = {
 //     id: number
@@ -16,11 +16,21 @@ type LocationType = {
 //     location: LocationType
 // }
 
+export type setCurrentPageActionType = {
+    type: typeof SET_CURRENT_PAGE
+    currentPage: number
+}
+
+export type setUsersTotalCountActionType = {
+    type: typeof SET_USERS_TOTAL_COUNT,
+    count: number
+}
+
 export type UserType = {
     name: string
     id: number
     uniqueUrlName: string
-    photos : {
+    photos: {
         small: string
         large: string
     }
@@ -30,15 +40,26 @@ export type UserType = {
 
 export type UsersPageType = {
     users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 export type ActionsType =
     | ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setUsersAC>
+    | setCurrentPageActionType
+    | setUsersTotalCountActionType
+
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
 
 let initialUsersState: UsersPageType = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
 export const usersReducer = (state: UsersPageType = initialUsersState, action: ActionsType): UsersPageType => {
@@ -55,9 +76,13 @@ export const usersReducer = (state: UsersPageType = initialUsersState, action: A
                 users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)
             }
         case 'SET-USERS':
+            return {...state, users: action.users}
+        case SET_CURRENT_PAGE:
             return {
-                ...state, users: [...state.users, ...action.users]
+                ...state, currentPage: action.currentPage
             }
+        case SET_USERS_TOTAL_COUNT:
+            return {...state, totalUsersCount: action.count}
         default:
             return state;
     }
@@ -66,6 +91,17 @@ export const usersReducer = (state: UsersPageType = initialUsersState, action: A
 export const followAC = (userId: number) => ({type: 'FOLLOW', userId} as const)
 export const unfollowAC = (userId: number) => ({type: 'UNFOLLOW', userId} as const)
 export const setUsersAC = (users: UserType[]) => ({type: 'SET-USERS', users} as const)
-
+export const setCurrentPageAC = (currentPage: number): setCurrentPageActionType => (
+    {
+        type: SET_CURRENT_PAGE,
+        currentPage
+    }
+)
+export const setUsersTotalCountAC = (totalUsersCount: number): setUsersTotalCountActionType => (
+    {
+        type: SET_USERS_TOTAL_COUNT,
+        count: totalUsersCount
+    }
+)
 
 

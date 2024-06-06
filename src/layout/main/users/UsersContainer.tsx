@@ -2,24 +2,39 @@ import {connect} from "react-redux";
 import {Users} from "./Users";
 import {AppStateType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
-import {followAC, setUsersAC, unfollowAC, UserType} from "../../../redux/users-reducer";
+import {
+    followAC,
+    setCurrentPageAC,
+    setUsersAC, setUsersTotalCountAC,
+    unfollowAC,
+    UsersPageType,
+    UserType
+} from "../../../redux/users-reducer";
 import {UsersClass} from "./UsersClass";
 
-type MapStateToPropsType = {
-    users: UserType[]
-}
+// type MapStateToPropsType = {
+//     users: UserType[]
+//     pageSize: number
+//     totalUsersCount: number
+//     currentPage: number
+// }
 
 type MapDispatchToPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     setUsers: (users: UserType[]) => void
+    setCurrentPage: (pageNumber: number) => void
+    setTotalUsersCount: (totalUsersCount: number) => void
 }
 
-export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
+export type UsersContainerPropsType = UsersPageType & MapDispatchToPropsType
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: AppStateType): UsersPageType => {
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage
     }
 }
 
@@ -33,8 +48,16 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         },
         setUsers: (users: UserType[]) => {
             dispatch(setUsersAC(users))
+        },
+        setCurrentPage: (pageNumber: number) => {
+            dispatch(setCurrentPageAC(pageNumber))
+        },
+        setTotalUsersCount: (totalCount: number) => {
+            dispatch(setUsersTotalCountAC(totalCount))
         }
     }
 }
 
 export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClass)
+
+
