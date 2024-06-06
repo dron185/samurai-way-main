@@ -1,5 +1,4 @@
 import {connect} from "react-redux";
-import {Users} from "./Users";
 import {AppStateType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
 import {
@@ -10,14 +9,7 @@ import {
     UsersPageType,
     UserType
 } from "../../../redux/users-reducer";
-import {UsersClass} from "./UsersClass";
-
-// type MapStateToPropsType = {
-//     users: UserType[]
-//     pageSize: number
-//     totalUsersCount: number
-//     currentPage: number
-// }
+import {UsersAPIComponent} from "./UsersAPIComponent";
 
 type MapDispatchToPropsType = {
     follow: (userId: number) => void
@@ -58,6 +50,6 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClass)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
 
 
