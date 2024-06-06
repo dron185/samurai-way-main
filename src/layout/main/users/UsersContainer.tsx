@@ -13,7 +13,7 @@ import React from "react";
 import axios from "axios";
 import {UsersFC} from "./UsersFC";
 
-export class UsersAPIComponent extends React.Component<UsersContainerPropsType> {
+class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items);
@@ -80,6 +80,6 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
 
 

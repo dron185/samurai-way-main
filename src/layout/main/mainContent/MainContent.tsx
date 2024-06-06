@@ -6,7 +6,7 @@ import {Music} from "../music/Music";
 import {Settings} from "../settings/Settings";
 import s from './MainContent.module.css'
 import {NewDialogsContainer} from "../dialogs/NewDialogsContainer";
-import {UsersContainer} from "../users/UsersContainer";
+import UsersContainer from "../users/UsersContainer";
 
 export const MainContent: React.FC = () => {
     return (
