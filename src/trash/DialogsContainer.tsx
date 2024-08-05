@@ -5,10 +5,10 @@ import {
     DialogType,
     MessageType,
     newMessageTextType
-} from "../../../redux/dialogs-reducer";
+} from "../redux/dialogs-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../../redux/redux-store";
-import {Dialogs} from "./Dialogs";
+import {AppStateType} from "../redux/redux-store";
+import {Dialogs} from "../layout/main/dialogs/Dialogs";
 
 
 export const DialogsContainer: React.FC/*<DialogsPropsType>*/ = () => {

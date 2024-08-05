@@ -1,9 +1,17 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import {Post} from './post/Post'
-import {MyPostsPropsType} from "./NewMyPostsContainer";
+import {PostType} from "../../../../redux/profile-reducer";
+//import {MyPostsPropsType} from "./NewMyPostsContainer";
 
 //Презентационные компоненты занимаются отображением UI.
+
+type MyPostsPropsType = {
+    posts: PostType[]
+    newPostText: string
+    addNewPost: (newPostText: string) => void
+    changeNewText: (text: string) => void
+}
 
 export const MyPosts = (props : MyPostsPropsType) => {
 

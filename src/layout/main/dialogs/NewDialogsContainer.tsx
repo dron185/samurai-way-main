@@ -1,4 +1,5 @@
 import {
+    ActionsType,
     addMessageAC,
     changeNewMessageAC,
     DialogType,
@@ -28,6 +29,7 @@ type MapDispatchToPropsType = {
 export type NewDialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 // каждый раз как в стейте происходят изменения-запускается эта функция:
+// смысл этой ф-ции-замапить стэйт на пропсы, т.е. превратить часть стейта в пропсы.
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         dialogs: state.dialogsPage.dialogs,
@@ -36,7 +38,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+//в пропсы попадут 2 колбэка, их мы будем отправлять в нашу презинтационную компоненту
+const mapDispatchToProps = (dispatch: Dispatch<ActionsType>): MapDispatchToPropsType => {
     return {
         addMessage: (text: newMessageTextType)=> {
             dispatch(addMessageAC(text));
@@ -50,3 +53,5 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
 export const NewDialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
 // ф-ция connect() создает контейнерную компоненту, внутри ее - она рендерит презентационную компоненту, и внутрь презентационной компоненты в качестве пропсов - передает те св-ва, которые сидят в этих 2-х объектах - которые возвращает f1() и f2().
+
+// мы говорим: эту презинтационную компоненту (Dialogs) законнекть к стору по этим правилам: (mapStateToProps, mapDispatchToProps)

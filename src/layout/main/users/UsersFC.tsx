@@ -2,6 +2,7 @@ import styles from "./Users.module.css";
 import {UsersPageType, UserType} from "../../../redux/users-reducer";
 import userPhoto from "../../../assets/images/avatar4.png";
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 type UsersFCPropsType = {
     onPageChanged: (pageNumber: number) => void
@@ -34,11 +35,15 @@ export const UsersFC: React.FC<UsersFCPropsType> = (props) => {
                 props.users.map((u: UserType) =>
                     <div key={u.id}>
                             <span>
-                                 <div><img
-                                     src={u.photos.small !== null ? u.photos.small : userPhoto}
-                                     alt=""
-                                     className={styles.userPhoto}
-                                 /></div>
+                                 <div>
+                                     <NavLink to={"/profile/" + u.id}>
+                                         <img
+                                             src={u.photos.small !== null ? u.photos.small : userPhoto}
+                                             alt={u.name}
+                                             className={styles.userPhoto}
+                                         />
+                                     </NavLink>
+                                 </div>
                                 <div>
                                     {u.followed ?
                                         <button onClick={() => {

@@ -1,8 +1,8 @@
 import React from 'react';
-import {addPostAC, changeNewTextAC, newPostTextType, PostType} from "../../../../redux/profile-reducer";
+import {addPostAC, changeNewTextAC, newPostTextType, PostType} from "../redux/profile-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../../../redux/redux-store";
-import {MyPosts} from "./MyPosts";
+import {AppStateType} from "../redux/redux-store";
+import {MyPosts} from "../layout/main/profile/myPosts/MyPosts";
 
 //Контейнерные компоненты занимаются управлением состоянием и логикой.
 
