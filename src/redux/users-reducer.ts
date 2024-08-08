@@ -86,8 +86,7 @@ export const usersReducer = (state: UsersPageType = initialUsersState, action: A
                 users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)
             }
         case 'SET-USERS':
-            //return {...state, users: action.users}
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
         case SET_CURRENT_PAGE:
             return {
                 ...state, currentPage: action.currentPage
