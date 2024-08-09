@@ -9,7 +9,33 @@ export type newPostTextType = string
 export type ProfilePageType = {
     posts: PostType[]
     newPostText: newPostTextType
-    profile: any
+    profile: ProfileType | null
+}
+
+type ProfileContactsType = {
+    facebook: string
+    website: string
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: null | string
+    github: string
+    mainLink: null | string
+}
+
+type ProfilePhotosType = {
+    small: string
+    large: string
+}
+
+export type ProfileType = {
+    aboutMe: string
+    contacts: ProfileContactsType
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: ProfilePhotosType
 }
 
 // Actions Types:
@@ -23,7 +49,7 @@ export type changeNewTextActionType = {
 }
 export type setUserProfileActionType = {
     type: typeof SET_USER_PROFILE
-    profile: any
+    profile: /*ProfileType | null*/any
 }
 
 export type ActionsType =
@@ -44,6 +70,27 @@ let initialProfileState: ProfilePageType = {
         {id: 4, message: "DaDa", likesCount: 5},
     ],
     newPostText: "",
+    // profile: {
+    //     "aboutMe": "я круто чувак 1001%",
+    //     "contacts": {
+    //         "facebook": "facebook.com",
+    //         "website": '',
+    //         "vk": "vk.com",
+    //         "twitter": "https://twitter.com",
+    //         "instagram": "instagram.com",
+    //         "youtube": null,
+    //         "github": "github.com",
+    //         "mainLink": null
+    //     },
+    //     "lookingForAJob": true,
+    //     "lookingForAJobDescription": "не ищу, а дурачусь",
+    //     "fullName": "samurai dimych",
+    //     "userId": 2,
+    //     "photos": {
+    //         "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+    //         "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+    //     }
+    // }
     profile: null
 }
 
@@ -85,7 +132,7 @@ export const changeNewTextAC = (newText: string): changeNewTextActionType => {
     } as const
 }
 
-export const setUserProfile = (profile: any): setUserProfileActionType => (
+export const setUserProfileAC = (profile: ProfileType): setUserProfileActionType => (
     {type: SET_USER_PROFILE, profile}
 )
 

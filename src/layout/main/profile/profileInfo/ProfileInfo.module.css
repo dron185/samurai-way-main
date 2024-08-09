@@ -12,3 +12,7 @@
 .descriptionBlock {
     padding: 10px;
 }
+
+.header {
+    font-weight: bold;
+}

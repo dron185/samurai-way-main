@@ -6,7 +6,7 @@ import {Settings} from "../settings/Settings";
 import s from './MainContent.module.css'
 import {NewDialogsContainer} from "../dialogs/NewDialogsContainer";
 import UsersContainer from "../users/UsersContainer";
-import {ProfileContainer} from "../profile/ProfileContainer";
+import ProfileContainer from "../profile/ProfileContainer";
 
 export const MainContent: React.FC = () => {
     return (
