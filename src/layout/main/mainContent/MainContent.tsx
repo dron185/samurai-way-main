@@ -13,7 +13,7 @@ export const MainContent: React.FC = () => {
         <div className={s.mainContent}>
             {/*<Route path={'/dialogs'} component={Dialogs}/>*/}
             <Route path={'/dialogs'} render={()=><NewDialogsContainer/>}/>
-            <Route path={'/profile'} render={()=> <ProfileContainer/>}/>
+            <Route path={'/profile/:userId?'} render={()=> <ProfileContainer/>}/>
             <Route path={'/news'} component={News}/>
             <Route path={'/music'} component={Music}/>
             <Route path={'/settings'} component={Settings}/>
@@ -21,3 +21,4 @@ export const MainContent: React.FC = () => {
         </div>
     );
 };
+
