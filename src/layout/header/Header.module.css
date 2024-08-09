@@ -4,12 +4,20 @@
     min-height: 90px;
 }
 
-.header div {
-    display: flex;
-    align-items: center;
-}
+/*.header div {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*}*/
 
-.header img {
+.logo {
     border: 5px solid white;
     border-radius: 12px;
+}
+
+.loginBlock {
+    float: right;
+}
+
+.loginBlock a {
+    color: white;
 }
