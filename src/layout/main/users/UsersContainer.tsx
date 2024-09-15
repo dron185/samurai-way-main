@@ -4,35 +4,40 @@ import {
     followAC,
     setCurrentPageAC,
     setUsersAC,
-    setUsersTotalCountAC,
+    setUsersTotalCountAC, toggleFollowingProgressAC,
     toggleIsFetchingAC,
     unfollowAC,
     UsersPageType,
     UserType
 } from "../../../redux/users-reducer";
 import React from "react";
-import axios from "axios";
 import {UsersFC} from "./UsersFC";
 import {Preloader} from "../../../components/preloader/Preloader";
+import {usersAPI} from "../../../api/api";
+import {Dispatch} from "redux";
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     // все сайд-эффекты делаются в методе жизненного цикла - componentDidMount():
     componentDidMount() {
         this.props.toggleIsFetching(true); // - когда идет запрос на сервак
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-            this.props.toggleIsFetching(false); // - когда приходит ответ
-            this.props.setUsers(response.data.items);
-            this.props.setTotalUsersCount(response.data.totalCount);
-        });
+
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
+                this.props.toggleIsFetching(false); // - когда приходит ответ
+                this.props.setUsers(data.items);
+                this.props.setTotalUsersCount(data.totalCount);
+            });
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
         this.props.toggleIsFetching(true); // - когда меняем страницу
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
-            this.props.toggleIsFetching(false); // - когда приходит ответ
-            this.props.setUsers(response.data.items)
-        });
+
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
+            .then(data => {
+                this.props.toggleIsFetching(false); // - когда приходит ответ
+                this.props.setUsers(data.items)
+            });
     }
 
     render() {
@@ -47,6 +52,8 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
                 users={this.props.users}
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
+                followingInProgress={this.props.followingInProgress}
+                toggleFollowingProgress={this.props.toggleFollowingProgress}
             />
         </>
     }
@@ -59,6 +66,7 @@ type MapDispatchToPropsType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
+    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 }
 
 export type UsersContainerPropsType = UsersPageType & MapDispatchToPropsType
@@ -70,10 +78,11 @@ const mapStateToProps = (state: AppStateType): UsersPageType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
-/*const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         follow: (userId: number) => {
             dispatch(followAC(userId))
@@ -92,17 +101,21 @@ const mapStateToProps = (state: AppStateType): UsersPageType => {
         },
         toggleIsFetching: (isFetching: boolean) => {
             dispatch(toggleIsFetchingAC(isFetching))
+        },
+        toggleFollowingProgress: (isFetching: boolean, userId: number) => {
+            dispatch(toggleFollowingProgressAC(isFetching, userId))
         }
     }
-}*/
+}
 
-export default connect(mapStateToProps, {
+export default connect(mapStateToProps, /*{
     follow: followAC,
     unfollow: unfollowAC,
     setUsers: setUsersAC,
     setCurrentPage: setCurrentPageAC,
     setTotalUsersCount: setUsersTotalCountAC,
-    toggleIsFetching: toggleIsFetchingAC
-})(UsersContainer)
+    toggleIsFetching: toggleIsFetchingAC,
+    toggleFollowingProgress: toggleFollowingProgressAC
+}*/ mapDispatchToProps )(UsersContainer)
 
 
