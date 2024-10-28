@@ -1,6 +1,6 @@
-import photo1 from '../assets/images/avatar4.png'
-import photo2 from '../assets/images/avatar5.png'
-import photo3 from '../assets/images/avatar6.png'
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
+import {AppDispatch, AppStateType} from "./redux-store";
 
 // type LocationType = {
 //     city: string
@@ -110,7 +110,8 @@ export const usersReducer = (state: UsersPageType = initialUsersState, action: A
                 ...state,
                 followingInProgress: action.isFetching ?
                     [...state.followingInProgress, action.userId] :
-                    state.followingInProgress.filter(id => id !== action.userId)}
+                    state.followingInProgress.filter(id => id !== action.userId)
+            }
         default:
             return state;
     }
@@ -145,4 +146,17 @@ export const toggleFollowingProgressAC = (isFetching: boolean, userId: number): 
     }
 )
 
+// thunks
+
+export const getUsersThunkCreatorTC = (currentPage: number, pageSize: number) => (dispatch: AppDispatch) => {
+
+    dispatch(toggleIsFetchingAC(true)); // - когда идет запрос на сервак
+
+    usersAPI.getUsers(currentPage, pageSize)
+        .then(data => {
+            dispatch(toggleIsFetchingAC(false)); // - когда приходит ответ
+            dispatch(setUsersAC(data.items));
+            dispatch(setUsersTotalCountAC(data.totalCount));
+        });
+}
 
