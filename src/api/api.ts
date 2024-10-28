@@ -39,3 +39,22 @@ export const usersAPI = {
         return instance.get<ProfileType>(`profile/${userId}`);
     },
 }
+
+
+export type DataType = {
+    id: number
+    email: string
+    login: string
+}
+
+export type meResponse = {
+    resultCode: number
+    messages: string[]
+    data: DataType
+}
+
+export const authAPI = {
+    me() {
+        return instance.get<meResponse>(`auth/me`)
+    }
+}

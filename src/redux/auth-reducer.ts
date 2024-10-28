@@ -5,7 +5,8 @@
 //     //isFetching: boolean
 // }
 
-import {DataType} from "../layout/header/HeaderContainer";
+
+import {DataType} from "../api/api";
 
 export type ActionsType = ReturnType<typeof setAuthUserDataAC>
 export type InitialUsersStateType = DataType & {
