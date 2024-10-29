@@ -10,6 +10,7 @@ import {
 import React from "react";
 import {UsersFC} from "./UsersFC";
 import {Preloader} from "../../../components/preloader/Preloader";
+import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     // все сайд-эффекты делаются в методе жизненного цикла - componentDidMount():
@@ -92,10 +93,6 @@ const mapDispatchToProps = (dispatch: AppDispatch): MapDispatchToPropsType => {
     }
 }
 
-export default connect(mapStateToProps, /*{
-    follow: followTC,
-    unfollow: unfollowTC,
-    setCurrentPage: setCurrentPageAC,
-}*/ mapDispatchToProps )(UsersContainer)
+export default withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(UsersContainer))
 
 

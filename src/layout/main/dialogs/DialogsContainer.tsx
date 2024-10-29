@@ -20,7 +20,6 @@ type MapStateToPropsType = {
     dialogs: DialogType[]
     messages: MessageType[]
     newMessageText: newMessageTextType
-    //isAuth: boolean
 }
 
 type MapDispatchToPropsType = {
@@ -37,7 +36,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
         newMessageText: state.dialogsPage.newMessageText,
-        //isAuth: state.auth.isAuth
     }
 }
 
@@ -54,7 +52,13 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionsType>): MapDispatchToProps
 }
 
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(Dialogs))
+const AuthRedirectComponent = withAuthRedirect(Dialogs)
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
+
+// export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(Dialogs))
+
+
+
 
 // ф-ция connect() создает контейнерную компоненту, внутри ее - она рендерит презентационную компоненту, и внутрь презентационной компоненты в качестве пропсов - передает те св-ва, которые сидят в этих 2-х объектах - которые возвращает f1() и f2().
 

@@ -42,3 +42,9 @@ const WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
 export default withAuthRedirect(connect(mapStateToProps, {getUserProfile: getUserProfileTC})(WithUrlDataContainerComponent))
 
+
+// or:
+
+// const AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+// const WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
+// export default connect(mapStateToProps, {getUserProfile: getUserProfileTC})(WithUrlDataContainerComponent)
