@@ -3,7 +3,8 @@ import s from './Dialogs.module.css'
 import {DialogItem} from "./dialogItem/DialogItem";
 import {Message} from "./message/Message";
 import avatar from "../../../assets/images/avatar1.png";
-import {NewDialogsPropsType} from "./NewDialogsContainer";
+import {NewDialogsPropsType} from "./DialogsContainer";
+import {Redirect} from "react-router-dom";
 
 export const Dialogs: React.FC<NewDialogsPropsType> = (props) => {
 
@@ -22,6 +23,8 @@ export const Dialogs: React.FC<NewDialogsPropsType> = (props) => {
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.newMessageChange(e.currentTarget.value)
     }
+
+    if(!props.isAuth) return <Redirect to="/login" />
 
     return (
         <div className={s.dialogs}>

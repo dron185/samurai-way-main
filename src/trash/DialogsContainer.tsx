@@ -11,11 +11,12 @@ import {AppStateType} from "../redux/redux-store";
 import {Dialogs} from "../layout/main/dialogs/Dialogs";
 
 
-export const DialogsContainer: React.FC/*<DialogsPropsType>*/ = () => {
+export const _DialogsContainer: React.FC/*<DialogsPropsType>*/ = () => {
 
     const dialogs = useSelector<AppStateType, DialogType[]>(state => state.dialogsPage.dialogs);
     const messages = useSelector<AppStateType, MessageType[]>(state => state.dialogsPage.messages)
     const newMessageText = useSelector<AppStateType, newMessageTextType>(state => state.dialogsPage.newMessageText)
+    const isAuth = useSelector<AppStateType, boolean>(state => state.auth.isAuth)
 
     const dispatch = useDispatch();
 
@@ -34,5 +35,6 @@ export const DialogsContainer: React.FC/*<DialogsPropsType>*/ = () => {
         newMessageText={newMessageText}
         addMessage={onSendMessageClick}
         newMessageChange={onNewMessageChange}
+        isAuth={isAuth}
     />
 };
