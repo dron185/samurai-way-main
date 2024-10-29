@@ -35,6 +35,6 @@ export const _DialogsContainer: React.FC/*<DialogsPropsType>*/ = () => {
         newMessageText={newMessageText}
         addMessage={onSendMessageClick}
         newMessageChange={onNewMessageChange}
-        isAuth={isAuth}
+        // isAuth={isAuth}
     />
 };

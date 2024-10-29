@@ -10,6 +10,7 @@ import {AppStateType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import {Dialogs} from "./Dialogs";
+import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
 
 // create container component _DialogsContainer with the help of react-redux (function - connect()):
 
@@ -19,7 +20,7 @@ type MapStateToPropsType = {
     dialogs: DialogType[]
     messages: MessageType[]
     newMessageText: newMessageTextType
-    isAuth: boolean
+    //isAuth: boolean
 }
 
 type MapDispatchToPropsType = {
@@ -36,7 +37,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
         newMessageText: state.dialogsPage.newMessageText,
-        isAuth: state.auth.isAuth
+        //isAuth: state.auth.isAuth
     }
 }
 
@@ -52,7 +53,8 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionsType>): MapDispatchToProps
     }
 }
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(Dialogs))
 
 // ф-ция connect() создает контейнерную компоненту, внутри ее - она рендерит презентационную компоненту, и внутрь презентационной компоненты в качестве пропсов - передает те св-ва, которые сидят в этих 2-х объектах - которые возвращает f1() и f2().
 
