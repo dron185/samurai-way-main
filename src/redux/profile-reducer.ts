@@ -133,7 +133,7 @@ const setUserProfileAC = (profile: ProfileType): setUserProfileActionType => (
     {type: SET_USER_PROFILE, profile}
 )
 
-const setUserStatusAC = (status: string): setUserStatusActionType => (
+const setStatusAC = (status: string): setUserStatusActionType => (
     {type: SET_STATUS, status}
 )
 
@@ -149,14 +149,16 @@ export const getUserProfileTC = (userId: string) => (dispatch: AppDispatch) => {
 export const getStatusTC = (userId: string) => (dispatch: AppDispatch) => {
     profileAPI.getStatus(userId)
         .then(response => {
-            dispatch(setUserStatusAC(response.data));
+            dispatch(setStatusAC(response.data));
         });
 }
 
-// export const updateStatusTC = (userId: string) => (dispatch: AppDispatch) => {
-//     profileAPI.getStatus(userId)
-//         .then(response => {
-//             dispatch(setUserStatusAC(response.data));
-//         });
-// }
+export const updateStatusTC = (status: string) => (dispatch: AppDispatch) => {
+    profileAPI.updateStatus(status)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setStatusAC(status));
+            }
+        });
+}
 

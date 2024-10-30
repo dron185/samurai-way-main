@@ -5,11 +5,13 @@ import {ProfileType} from "../../../../redux/profile-reducer";
 import {Preloader} from "../../../../components/preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus";
 
-type ProfileInfoPropsType = {
+type Props = {
     profile: ProfileType | null
+    status: string
+    updateStatus: (status: string) => void
 }
 
-export const ProfileInfo = (props: ProfileInfoPropsType) => {
+export const ProfileInfo = (props: Props) => {
     //если props.profile==null || props.profile==undefined-сокращенно:
     if (!props.profile) {
         return <Preloader/>
@@ -38,7 +40,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
             </div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large} alt="avatar"/>
-                <ProfileStatus status={'Hello my friends'}/>
+                <ProfileStatus status={props.status}/>
                 {info.map(el => <div><span className={s.header}>{el.title}</span>{el.value}</div>)}
             </div>
         </div>
