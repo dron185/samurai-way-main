@@ -11,6 +11,7 @@ import React from "react";
 import {UsersFC} from "./UsersFC";
 import {Preloader} from "../../../components/preloader/Preloader";
 import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     // все сайд-эффекты делаются в методе жизненного цикла - componentDidMount():
@@ -93,6 +94,11 @@ const mapDispatchToProps = (dispatch: AppDispatch): MapDispatchToPropsType => {
     }
 }
 
-export default withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(UsersContainer))
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(UsersContainer)
+
+// export default withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(UsersContainer))
 
 
