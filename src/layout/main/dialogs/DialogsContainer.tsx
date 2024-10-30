@@ -57,14 +57,6 @@ export const DialogsContainer = compose<ComponentType>(
     withAuthRedirect
 )(Dialogs)
 
-// const AuthRedirectComponent = withAuthRedirect(Dialogs)
-// export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
-
-// export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(Dialogs))
-
-
-
-
 // ф-ция connect() создает контейнерную компоненту, внутри ее - она рендерит презентационную компоненту, и внутрь презентационной компоненты в качестве пропсов - передает те св-ва, которые сидят в этих 2-х объектах - которые возвращает f1() и f2().
 
 // мы говорим: эту презинтационную компоненту (Dialogs) законнекть к стору по этим правилам: (mapStateToProps, mapDispatchToProps)

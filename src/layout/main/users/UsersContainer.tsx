@@ -17,26 +17,11 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
     // все сайд-эффекты делаются в методе жизненного цикла - componentDidMount():
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
-        // this.props.toggleIsFetching(true); // - когда идет запрос на сервак
-        //
-        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-        //     .then(data => {
-        //         this.props.toggleIsFetching(false); // - когда приходит ответ
-        //         this.props.setUsers(data.items);
-        //         this.props.setTotalUsersCount(data.totalCount);
-        //     });
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.getUsers(pageNumber, this.props.pageSize)
         this.props.setCurrentPage(pageNumber);
-        // this.props.toggleIsFetching(true); // - когда меняем страницу
-        //
-        // usersAPI.getUsers(pageNumber, this.props.pageSize)
-        //     .then(data => {
-        //         this.props.toggleIsFetching(false); // - когда приходит ответ
-        //         this.props.setUsers(data.items)
-        //     });
     }
 
     render() {
@@ -98,7 +83,4 @@ export default compose<React.ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),
     withAuthRedirect
 )(UsersContainer)
-
-// export default withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(UsersContainer))
-
 
