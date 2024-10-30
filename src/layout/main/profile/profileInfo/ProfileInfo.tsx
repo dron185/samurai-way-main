@@ -3,6 +3,7 @@ import s from './ProfileInfo.module.css'
 import photo from '../../../../assets/images/leaves-1350175_1920.jpg'
 import {ProfileType} from "../../../../redux/profile-reducer";
 import {Preloader} from "../../../../components/preloader/Preloader";
+import {ProfileStatus} from "./ProfileStatus";
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
@@ -15,19 +16,19 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
     }
 
     const info = [
-        { title: 'About me: ', value: props.profile.aboutMe },
-        { title: 'Full name: ', value: props.profile.fullName },
-        { title: 'Looking for a job description: ', value: props.profile.lookingForAJobDescription },
-        { title: 'Contacts: ', value: '' },
-        { title: 'Facebook: ', value: props.profile.contacts.facebook },
-        { title: 'Github: ', value: props.profile.contacts.github },
-        { title: 'Twitter: ', value: props.profile.contacts.twitter },
-        { title: 'Instagram: ', value: props.profile.contacts.instagram },
-        { title: 'VK: ', value: props.profile.contacts.vk },
-        { title: 'Youtube: ', value: props.profile.contacts.youtube },
-        { title: 'Website: ', value: props.profile.contacts.website },
-        { title: 'Main link: ', value: props.profile.contacts.mainLink },
-        { title: 'Looking for a job: ', value: props.profile.lookingForAJob }
+        {title: 'About me: ', value: props.profile.aboutMe},
+        {title: 'Full name: ', value: props.profile.fullName},
+        {title: 'Looking for a job description: ', value: props.profile.lookingForAJobDescription},
+        {title: 'Contacts: ', value: ''},
+        {title: 'Facebook: ', value: props.profile.contacts.facebook},
+        {title: 'Github: ', value: props.profile.contacts.github},
+        {title: 'Twitter: ', value: props.profile.contacts.twitter},
+        {title: 'Instagram: ', value: props.profile.contacts.instagram},
+        {title: 'VK: ', value: props.profile.contacts.vk},
+        {title: 'Youtube: ', value: props.profile.contacts.youtube},
+        {title: 'Website: ', value: props.profile.contacts.website},
+        {title: 'Main link: ', value: props.profile.contacts.mainLink},
+        {title: 'Looking for a job: ', value: props.profile.lookingForAJob}
     ];
 
     return (
@@ -37,6 +38,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
             </div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large} alt="avatar"/>
+                <ProfileStatus status={'Hello my friends'}/>
                 {info.map(el => <div><span className={s.header}>{el.title}</span>{el.value}</div>)}
             </div>
         </div>
