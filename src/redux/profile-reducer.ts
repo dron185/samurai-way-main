@@ -1,5 +1,5 @@
 import {AppDispatch} from "./redux-store";
-import {usersAPI} from "../api/api";
+import {profileAPI} from "../api/api";
 
 export type PostType = {
     id: number
@@ -13,6 +13,7 @@ export type ProfilePageType = {
     posts: PostType[]
     newPostText: newPostTextType
     profile: ProfileType | null
+    status: string
 }
 
 type ProfileContactsType = {
@@ -50,19 +51,27 @@ export type changeNewTextActionType = {
     type: typeof CHANGE_NEW_TEXT
     newText: string
 }
+
 export type setUserProfileActionType = {
     type: typeof SET_USER_PROFILE
     profile: /*ProfileType | null*/any
+}
+
+export type setUserStatusActionType = {
+    type: typeof SET_STATUS,
+    status: string
 }
 
 export type ActionsType =
     | addPostActionType
     | changeNewTextActionType
     | setUserProfileActionType
+    | setUserStatusActionType
 
 const ADD_POST = 'ADD-POST';
 const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
+const SET_STATUS = 'SET-STATUS';
 
 
 let initialProfileState: ProfilePageType = {
@@ -73,28 +82,8 @@ let initialProfileState: ProfilePageType = {
         {id: 4, message: "DaDa", likesCount: 5},
     ],
     newPostText: "",
-    // profile: {
-    //     "aboutMe": "я круто чувак 1001%",
-    //     "contacts": {
-    //         "facebook": "facebook.com",
-    //         "website": '',
-    //         "vk": "vk.com",
-    //         "twitter": "https://twitter.com",
-    //         "instagram": "instagram.com",
-    //         "youtube": null,
-    //         "github": "github.com",
-    //         "mainLink": null
-    //     },
-    //     "lookingForAJob": true,
-    //     "lookingForAJobDescription": "не ищу, а дурачусь",
-    //     "fullName": "samurai dimych",
-    //     "userId": 2,
-    //     "photos": {
-    //         "small": "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
-    //         "large": "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-    //     }
-    // }
-    profile: null
+    profile: null,
+    status: ""
 }
 
 export const profileReducer = (state: ProfilePageType = initialProfileState, action: ActionsType): ProfilePageType => {
@@ -115,6 +104,11 @@ export const profileReducer = (state: ProfilePageType = initialProfileState, act
             return {
                 ...state,
                 newPostText: action.newText,
+            }
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status,
             }
         case SET_USER_PROFILE:
             return {
@@ -139,10 +133,30 @@ const setUserProfileAC = (profile: ProfileType): setUserProfileActionType => (
     {type: SET_USER_PROFILE, profile}
 )
 
-// thunks
+const setUserStatusAC = (status: string): setUserStatusActionType => (
+    {type: SET_STATUS, status}
+)
 
+
+// thunks
 export const getUserProfileTC = (userId: string) => (dispatch: AppDispatch) => {
-    usersAPI.getProfile(userId).then(response => {
-        dispatch(setUserProfileAC(response.data));
-    });
+    profileAPI.getProfile(userId)
+        .then(response => {
+            dispatch(setUserProfileAC(response.data));
+        });
 }
+
+export const getStatusTC = (userId: string) => (dispatch: AppDispatch) => {
+    profileAPI.getStatus(userId)
+        .then(response => {
+            dispatch(setUserStatusAC(response.data));
+        });
+}
+
+// export const updateStatusTC = (userId: string) => (dispatch: AppDispatch) => {
+//     profileAPI.getStatus(userId)
+//         .then(response => {
+//             dispatch(setUserStatusAC(response.data));
+//         });
+// }
+

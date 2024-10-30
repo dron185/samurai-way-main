@@ -40,7 +40,7 @@ const mapDispatchToProps = (dispatch: Dispatch<addPostActionType | changeNewText
     }
 }
 
-export const NewMyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
 
 

@@ -6,7 +6,7 @@ import {MyPosts} from "../layout/main/profile/myPosts/MyPosts";
 
 //Контейнерные компоненты занимаются управлением состоянием и логикой.
 
-export const MyPostsContainer: React.FC = () => {
+export const _MyPostsContainer: React.FC = () => {
     const posts = useSelector<AppStateType, PostType[]>(state => state.profilePage.posts);
     const newPostText = useSelector<AppStateType ,newPostTextType>(state => state.profilePage.newPostText)
     const dispatch = useDispatch();

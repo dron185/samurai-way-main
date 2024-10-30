@@ -35,9 +35,23 @@ export const usersAPI = {
     unfollow(userId: number) {
         return instance.delete<followResponse>(`follow/${userId}`);
     },
-    getProfile(userId: string){
+    // getProfile(userId: string){
+    //     console.warn('Obsolete method. Please use profileAPI object')
+    //     return profileAPI.getProfile(userId);
+    // },
+}
+
+
+export const profileAPI = {
+    getProfile(userId: string) {
         return instance.get<ProfileType>(`profile/${userId}`);
     },
+    getStatus(userId: string) {
+        return instance.get<string>(`profile/status/${userId}`);
+    },
+    updateStatus(status: string) {
+        return instance.put<BaseResponse>(`profile/status`, {status});
+    }
 }
 
 
@@ -47,7 +61,7 @@ export type DataType = {
     login: string
 }
 
-export type meResponse = {
+export type BaseResponse = {
     resultCode: number
     messages: string[]
     data: DataType
@@ -55,6 +69,6 @@ export type meResponse = {
 
 export const authAPI = {
     me() {
-        return instance.get<meResponse>(`auth/me`)
+        return instance.get<BaseResponse>(`auth/me`)
     }
 }
