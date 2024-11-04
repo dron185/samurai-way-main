@@ -5,9 +5,14 @@ type Props = {
     updateStatus: (status: string) => void
 }
 
+type State = {
+    editMode: boolean
+    status: string
+}
+
 export class ProfileStatus extends React.Component<Props> {
 
-    state = {
+    state: State = {
         editMode: false,
         status: this.props.status
     }
@@ -21,10 +26,18 @@ export class ProfileStatus extends React.Component<Props> {
         this.props.updateStatus(this.state.status);
     }
 
-    onStatusChange = (e: ChangeEvent<HTMLInputElement> ) => {
+    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({
             status: e.currentTarget.value
         });
+    }
+
+    componentDidUpdate(prevProps: Props, prevState: State) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
 
     render() {
