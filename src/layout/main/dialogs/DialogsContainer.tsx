@@ -1,10 +1,8 @@
 import {
-    ActionsType,
+    DialogsActionsType,
     addMessageAC,
-    changeNewMessageAC,
     DialogType,
     MessageType,
-    newMessageTextType
 } from "../../../redux/dialogs-reducer";
 import {AppStateType} from "../../../redux/redux-store";
 import {compose, Dispatch} from "redux";
@@ -20,12 +18,11 @@ import {ComponentType} from "react";
 type MapStateToPropsType = {
     dialogs: DialogType[]
     messages: MessageType[]
-    newMessageText: newMessageTextType
+    // isAuth: boolean
 }
 
 type MapDispatchToPropsType = {
     addMessage: (newMessageText: string) => void
-    newMessageChange: (value: string) => void
 }
 
 export type NewDialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -36,18 +33,15 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMessageText: state.dialogsPage.newMessageText,
+        // isAuth: state.auth.isAuth
     }
 }
 
 //в пропсы попадут 2 колбэка, их мы будем отправлять в нашу презинтационную компоненту
-const mapDispatchToProps = (dispatch: Dispatch<ActionsType>): MapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch<DialogsActionsType>): MapDispatchToPropsType => {
     return {
-        addMessage: (text: newMessageTextType)=> {
+        addMessage: (text: string)=> {
             dispatch(addMessageAC(text));
-        },
-        newMessageChange: (value: string)=> {
-            dispatch(changeNewMessageAC(value));
         }
     }
 }
