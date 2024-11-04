@@ -40,7 +40,7 @@ export const ProfileInfo = (props: Props) => {
             </div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large} alt="avatar"/>
-                <ProfileStatus status={props.status}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 {info.map(el => <div><span className={s.header}>{el.title}</span>{el.value}</div>)}
             </div>
         </div>
