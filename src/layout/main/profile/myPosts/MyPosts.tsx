@@ -1,54 +1,56 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './MyPosts.module.css';
 import {Post} from './post/Post'
 import {PostType} from "../../../../redux/profile-reducer";
-//import {MyPostsPropsType} from "./NewMyPostsContainer";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 //Презентационные компоненты занимаются отображением UI.
 
 type MyPostsPropsType = {
     posts: PostType[]
-    newPostText: string
     addNewPost: (newPostText: string) => void
-    changeNewText: (text: string) => void
 }
+
+type FormDataType = { newPostText: string }
+
+
+const AddNewPostForm = (props: InjectedFormProps<FormDataType>) => {
+    return (
+        <form className={s.postWrapper} onSubmit={props.handleSubmit}>
+            <div>
+                <Field
+                    component="textarea"
+                    name="newPostText"
+                />
+            </div>
+            <div>
+                <button>Add post</button>
+            </div>
+        </form>
+    )
+}
+
+const AddNewPostFormRedux = reduxForm<FormDataType>({form: "ProfileAddNewPostForm"})(AddNewPostForm)
+
 
 export const MyPosts = (props : MyPostsPropsType) => {
 
     const postsElements = props.posts.map(el =>
         <Post key={el.id} message={el.message} likesCount={el.likesCount}/>)
 
-    const onAddPost = () => {
-        props.addNewPost(props.newPostText);
-    }
 
-    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement> ) => {
-        let text = e.currentTarget.value;
-        props.changeNewText(text)
+    const onAddPost = (values: FormDataType) => {
+        props.addNewPost(values.newPostText)
     }
 
     return (
         <div className={s.postsBlock}>
             <h3 className={s.postsTitle}>My posts</h3>
-            <div className={s.postWrapper}>
-                <div>
-                    <textarea
-                        onChange={onPostChange}
-                        value={props.newPostText}
-                    />
-                </div>
-                <div>
-                    <button onClick={onAddPost}>Add post</button>
-                </div>
-                {/*<button>Remove</button>*/}
-            </div>
+            <AddNewPostFormRedux onSubmit={onAddPost}/>
             <div className={s.posts}>
                 {postsElements}
             </div>
         </div>
     );
 };
-
-
-
 

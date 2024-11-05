@@ -7,11 +7,8 @@ export type PostType = {
     likesCount: number
 }
 
-export type newPostTextType = string
-
 export type ProfilePageType = {
     posts: PostType[]
-    newPostText: newPostTextType
     profile: ProfileType | null
     status: string
 }
@@ -47,14 +44,10 @@ export type addPostActionType = {
     type: typeof ADD_POST
     postText: string
 }
-export type changeNewTextActionType = {
-    type: typeof CHANGE_NEW_TEXT
-    newText: string
-}
 
 export type setUserProfileActionType = {
     type: typeof SET_USER_PROFILE
-    profile: /*ProfileType | null*/any
+    profile: ProfileType | null
 }
 
 export type setUserStatusActionType = {
@@ -64,12 +57,10 @@ export type setUserStatusActionType = {
 
 export type ActionsType =
     | addPostActionType
-    | changeNewTextActionType
     | setUserProfileActionType
     | setUserStatusActionType
 
 const ADD_POST = 'ADD-POST';
-const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_STATUS = 'SET-STATUS';
 
@@ -81,7 +72,6 @@ let initialProfileState: ProfilePageType = {
         {id: 3, message: "BlaBla", likesCount: 7},
         {id: 4, message: "DaDa", likesCount: 5},
     ],
-    newPostText: "",
     profile: null,
     status: ""
 }
@@ -98,12 +88,6 @@ export const profileReducer = (state: ProfilePageType = initialProfileState, act
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ''
-            }
-        case CHANGE_NEW_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText,
             }
         case SET_STATUS:
             return {
@@ -121,13 +105,6 @@ export const profileReducer = (state: ProfilePageType = initialProfileState, act
 }
 
 export const addPostAC = (postText: string): addPostActionType => ({type: ADD_POST, postText: postText})
-
-export const changeNewTextAC = (newText: string): changeNewTextActionType => {
-    return {
-        type: CHANGE_NEW_TEXT,
-        newText: newText,
-    } as const
-}
 
 const setUserProfileAC = (profile: ProfileType): setUserProfileActionType => (
     {type: SET_USER_PROFILE, profile}
