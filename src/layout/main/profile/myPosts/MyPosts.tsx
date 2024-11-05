@@ -3,6 +3,8 @@ import s from './MyPosts.module.css';
 import {Post} from './post/Post'
 import {PostType} from "../../../../redux/profile-reducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../../../utils/validators/validators";
+import {Textarea} from "../../../../components/common/FormsControls/FormsControls";
 
 //Презентационные компоненты занимаются отображением UI.
 
@@ -13,14 +15,18 @@ type MyPostsPropsType = {
 
 type FormDataType = { newPostText: string }
 
+const maxLength10 = maxLengthCreator(10);
+
 
 const AddNewPostForm = (props: InjectedFormProps<FormDataType>) => {
     return (
         <form className={s.postWrapper} onSubmit={props.handleSubmit}>
             <div>
                 <Field
-                    component="textarea"
                     name="newPostText"
+                    component={Textarea}
+                    validate={[required, maxLength10]}
+                    placeholder={"Post message"}
                 />
             </div>
             <div>
