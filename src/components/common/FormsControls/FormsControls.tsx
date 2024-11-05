@@ -1,14 +1,16 @@
 import {WrappedFieldInputProps, WrappedFieldMetaProps} from "redux-form/lib/Field";
-import {TextareaHTMLAttributes} from "react";
+import {InputHTMLAttributes, TextareaHTMLAttributes} from "react";
 import styles from './FormsControls.module.css'
 
-type Props = {
-    input: WrappedFieldInputProps;
-    meta: WrappedFieldMetaProps;
-} & TextareaHTMLAttributes<HTMLTextAreaElement>
+type WrappedFieldProps = {
+    input: WrappedFieldInputProps
+    meta: WrappedFieldMetaProps
+}
 
+type TextareaProps = WrappedFieldProps & TextareaHTMLAttributes<HTMLTextAreaElement>
+type InputProps = WrappedFieldProps & InputHTMLAttributes<HTMLInputElement>
 
-export const Textarea = ({input, meta, ...props}: Props) => {
+export const Textarea = ({input, meta, ...props}: TextareaProps) => {
 
     const hasError = meta.touched && meta.error;
     return (
@@ -21,3 +23,17 @@ export const Textarea = ({input, meta, ...props}: Props) => {
     )
 }
 
+
+
+export const Input = ({input, meta, ...props}: InputProps) => {
+
+    const hasError = meta.touched && meta.error;
+    return (
+        <div className={styles.formControl + " " + (hasError ? styles.error: "")}>
+            <div>
+                <input {...input} {...props} />
+            </div>
+            {hasError && <span>{meta.error}</span>}
+        </div>
+    )
+}
