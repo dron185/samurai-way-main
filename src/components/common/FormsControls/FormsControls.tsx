@@ -1,39 +1,28 @@
-import {WrappedFieldInputProps, WrappedFieldMetaProps} from "redux-form/lib/Field";
-import {InputHTMLAttributes, TextareaHTMLAttributes} from "react";
-import styles from './FormsControls.module.css'
+import {WrappedFieldProps} from "redux-form/lib/Field";
+import s from './FormsControls.module.css'
 
-type WrappedFieldProps = {
-    input: WrappedFieldInputProps
-    meta: WrappedFieldMetaProps
+type FormControlProps = WrappedFieldProps & {
+    tagName: 'textarea' | 'input'
 }
 
-type TextareaProps = WrappedFieldProps & TextareaHTMLAttributes<HTMLTextAreaElement>
-type InputProps = WrappedFieldProps & InputHTMLAttributes<HTMLInputElement>
-
-export const Textarea = ({input, meta, ...props}: TextareaProps) => {
-
+export const FormControl = ({input, meta, tagName, ...props}: FormControlProps) => {
     const hasError = meta.touched && meta.error;
+    const Tag = tagName;
+
     return (
-        <div className={styles.formControl + " " + (hasError ? styles.error: "")}>
+        <div className={`${s.formControl} ${hasError ? s.error : ""}`}>
             <div>
-                <textarea {...input} {...props} />
+                <Tag {...input} {...props} />
             </div>
             {hasError && <span>{meta.error}</span>}
         </div>
     )
 }
 
+export const Textarea = (props: WrappedFieldProps) => {
+    return <FormControl tagName='textarea' {...props}/>
+}
 
-
-export const Input = ({input, meta, ...props}: InputProps) => {
-
-    const hasError = meta.touched && meta.error;
-    return (
-        <div className={styles.formControl + " " + (hasError ? styles.error: "")}>
-            <div>
-                <input {...input} {...props} />
-            </div>
-            {hasError && <span>{meta.error}</span>}
-        </div>
-    )
+export const Input = (props: WrappedFieldProps) => {
+    return <FormControl tagName='input' {...props}/>
 }

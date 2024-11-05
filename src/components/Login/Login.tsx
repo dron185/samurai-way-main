@@ -1,6 +1,6 @@
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/FormsControls/FormsControls";
-import {maxLengthCreator, required} from "../../utils/validators/validators";
+import {required} from "../../utils/validators/validators";
 
 type FormDataType = {
     login: string
