@@ -4,9 +4,9 @@ import {DialogItem} from "./dialogItem/DialogItem";
 import {Message} from "./message/Message";
 import avatar from "../../../assets/images/avatar1.png";
 import {NewDialogsPropsType} from "./DialogsContainer";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {AddMessageFormRedux} from "./AddMessageForm/AddMessageForm";
 
-type FormDataType = { newMessageBody: string }
+export type FormDataType = { newMessageBody: string }
 
 export const Dialogs: React.FC<NewDialogsPropsType> = (props) => {
 
@@ -18,12 +18,9 @@ export const Dialogs: React.FC<NewDialogsPropsType> = (props) => {
         </div>
     )
 
-
     const addNewMessage = (formData: FormDataType) => {
         props.addMessage(formData.newMessageBody)
     }
-
-    // if (!props.isAuth) return <Redirect to="/login"/>
 
     return (
         <div className={s.dialogs}>
@@ -37,22 +34,3 @@ export const Dialogs: React.FC<NewDialogsPropsType> = (props) => {
         </div>
     );
 };
-
-const AddMessageForm = (props: InjectedFormProps<FormDataType>) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field
-                    component="textarea"
-                    name="newMessageBody"
-                    placeholder="Enter your message"
-                />
-            </div>
-            <div>
-                <button>Add message</button>
-            </div>
-        </form>
-    )
-}
-
-const AddMessageFormRedux = reduxForm<FormDataType>({form: "dialogAddMessageForm"})(AddMessageForm)
