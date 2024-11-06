@@ -7,7 +7,7 @@ import s from './MainContent.module.css'
 import {DialogsContainer} from "../dialogs/DialogsContainer";
 import UsersContainer from "../users/UsersContainer";
 import ProfileContainer from "../profile/ProfileContainer";
-import {Login} from "../../../components/Login/Login";
+import {LoginContainer} from "../../../components/Login/Login";
 
 export const MainContent: React.FC = () => {
     return (
@@ -19,7 +19,7 @@ export const MainContent: React.FC = () => {
             <Route path={'/music'} component={Music}/>
             <Route path={'/settings'} component={Settings}/>
             <Route path={'/users'} render={()=><UsersContainer/>}/>
-            <Route path={'/login'} render={()=><Login/>}/>
+            <Route path={'/login'} render={()=><LoginContainer/>}/>
         </div>
     );
 };

@@ -1,9 +1,12 @@
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
+import {connect} from "react-redux";
+import {loginTC} from "../../redux/auth-reducer";
+import {LoginParams} from "../../api/api";
 
 type FormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
@@ -15,9 +18,9 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field
-                    placeholder={"Login"}
+                    placeholder={"Email"}
                     validate={[required]}
-                    name={"login"}
+                    name={"email"}
                     component={Input}/>
             </div>
             <div>
@@ -25,7 +28,8 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                     placeholder={"Password"}
                     validate={[required]}
                     name={"password"}
-                    component={Input}/>
+                    component={Input}
+                    type="password"/>
             </div>
             <div>
                 <Field type={"checkbox"} name={"rememberMe"} component={Input}/> remember me
@@ -39,9 +43,10 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
 export const LoginReduxForm = reduxForm<FormDataType>({form: "login"})(LoginForm)
 
-export const Login = () => {
+export const Login = (props: MapDispatchToPropsType) => {
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+        const {email, password, rememberMe} = formData
+        props.login({email, password, rememberMe})
     }
     return (
         <div>
@@ -51,3 +56,8 @@ export const Login = () => {
     )
 }
 
+type MapDispatchToPropsType = {
+    login: (data: LoginParams) => void
+}
+
+export const LoginContainer = connect(null, {login: loginTC})(Login)

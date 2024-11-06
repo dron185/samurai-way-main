@@ -46,25 +46,48 @@ export const profileAPI = {
         return instance.get<string>(`profile/status/${userId}`);
     },
     updateStatus(status: string) {
-        return instance.put<BaseResponse>(`profile/status`, {status});
+        return instance.put<BaseResponse<DataType>>(`profile/status`, {status});
     }
 }
 
 
 export type DataType = {
-    id: number
-    email: string
-    login: string
+    id: number | null
+    email: string | null
+    login: string | null
 }
 
-export type BaseResponse = {
+
+export type FieldError = {
+    error: string
+    field: string
+}
+
+export type BaseResponse<T = {}> = {
     resultCode: number
     messages: string[]
-    data: DataType
+    data: T
+    fieldsErrors: FieldError[]
+}
+
+export type LoginParams = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?: string | null
 }
 
 export const authAPI = {
     me() {
-        return instance.get<BaseResponse>(`auth/me`)
-    }
+        return instance.get<BaseResponse<DataType>>(`auth/me`)
+    },
+    login(data: LoginParams) {
+        return instance.post<BaseResponse<{userId: number}>>(`auth/login`, data)
+    },
+    logout() {
+        return instance.delete<BaseResponse>(`auth/login`)
+    },
+
 }
+
+
