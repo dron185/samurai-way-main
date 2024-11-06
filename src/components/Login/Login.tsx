@@ -6,14 +6,13 @@ import {loginTC} from "../../redux/auth-reducer";
 import {LoginParams} from "../../api/api";
 import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
+import style from "../common/FormsControls/FormsControls.module.css"
 
 type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
 }
-
-// const maxLength10 = maxLengthCreator(10);
 
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
@@ -36,6 +35,9 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             <div>
                 <Field type={"checkbox"} name={"rememberMe"} component={Input}/> remember me
             </div>
+            {props.error && <div className={style.formSummaryError}>
+                {props.error}
+            </div>}
             <div>
                 <button>Login</button>
             </div>
@@ -54,7 +56,7 @@ export const Login = (props: LoginPropsType) => {
     }
 
     if (props.isAuth) {
-        return <Redirect to="/profile" />
+        return <Redirect to="/profile"/>
     }
 
     return (

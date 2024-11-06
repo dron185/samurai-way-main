@@ -1,5 +1,6 @@
 import {authAPI, DataType, LoginParams} from "../api/api";
 import {AppDispatch} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 export type ActionsType = ReturnType<typeof setAuthUserDataAC>
 export type InitialUsersStateType = DataType & {
@@ -46,6 +47,10 @@ export const loginTC = (data: LoginParams) => (dispatch: AppDispatch) => {
     authAPI.login(data).then(response => {
         if (response.data.resultCode === 0) {
             dispatch(getAuthUserDataTC())
+        } else {
+            let message = response.data.messages.length > 0 ?
+                response.data.messages[0] : "Some error"
+            dispatch(stopSubmit("login", {_error: message}))
         }
     })
 }
