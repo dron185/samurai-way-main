@@ -4,6 +4,8 @@ import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {loginTC} from "../../redux/auth-reducer";
 import {LoginParams} from "../../api/api";
+import {Redirect} from "react-router-dom";
+import {AppStateType} from "../../redux/redux-store";
 
 type FormDataType = {
     email: string
@@ -43,11 +45,18 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
 export const LoginReduxForm = reduxForm<FormDataType>({form: "login"})(LoginForm)
 
-export const Login = (props: MapDispatchToPropsType) => {
+type LoginPropsType = MapStateToPropsType & MapDispatchToPropsType
+
+export const Login = (props: LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
         const {email, password, rememberMe} = formData
         props.login({email, password, rememberMe})
     }
+
+    if (props.isAuth) {
+        return <Redirect to="/profile" />
+    }
+
     return (
         <div>
             <h1 style={{fontSize: "29px", color: "white"}}>LOGIN</h1>
@@ -60,4 +69,14 @@ type MapDispatchToPropsType = {
     login: (data: LoginParams) => void
 }
 
-export const LoginContainer = connect(null, {login: loginTC})(Login)
+type MapStateToPropsType = {
+    isAuth: boolean
+}
+
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+    return {
+        isAuth: state.auth.isAuth,
+    }
+}
+
+export const LoginContainer = connect(mapStateToProps, {login: loginTC})(Login)
