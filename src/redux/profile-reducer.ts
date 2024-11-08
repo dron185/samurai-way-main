@@ -116,14 +116,14 @@ const setStatusAC = (status: string): setUserStatusActionType => (
 
 
 // thunks
-export const getUserProfileTC = (userId: string) => (dispatch: AppDispatch) => {
+export const getUserProfileTC = (userId: number) => (dispatch: AppDispatch) => {
     profileAPI.getProfile(userId)
         .then(response => {
             dispatch(setUserProfileAC(response.data));
         });
 }
 
-export const getStatusTC = (userId: string) => (dispatch: AppDispatch) => {
+export const getStatusTC = (userId: number) => (dispatch: AppDispatch) => {
     profileAPI.getStatus(userId)
         .then(response => {
             dispatch(setStatusAC(response.data));

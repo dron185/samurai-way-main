@@ -39,14 +39,14 @@ export const usersAPI = {
 
 
 export const profileAPI = {
-    getProfile(userId: string) {
+    getProfile(userId: number) {
         return instance.get<ProfileType>(`profile/${userId}`);
     },
-    getStatus(userId: string) {
+    getStatus(userId: number) {
         return instance.get<string>(`profile/status/${userId}`);
     },
     updateStatus(status: string) {
-        return instance.put<BaseResponse<DataType>>(`profile/status`, {status});
+        return instance.put<BaseResponse>(`profile/status`, {status});
     }
 }
 
@@ -82,7 +82,7 @@ export const authAPI = {
         return instance.get<BaseResponse<DataType>>(`auth/me`)
     },
     login(data: LoginParams) {
-        return instance.post<BaseResponse<{userId: number}>>(`auth/login`, data)
+        return instance.post<BaseResponse<{ userId: number }>>(`auth/login`, data)
     },
     logout() {
         return instance.delete<BaseResponse>(`auth/login`)
