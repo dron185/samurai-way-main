@@ -1,11 +1,11 @@
-import React, {PropsWithChildren} from 'react';
+import React, {PropsWithChildren, ReactNode} from 'react';
 import s from './Main.module.css'
 
 type MainPropsType = {
-
+    children: ReactNode
 }
 
-export const Main = ({children}: PropsWithChildren<MainPropsType>) => {
+export const Main = ({children}: MainPropsType) => {
     return (
         <main className={s.main}>
             {children}

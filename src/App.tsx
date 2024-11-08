@@ -6,22 +6,33 @@ import {Footer} from "./layout/footer/Footer";
 import {Container} from "./components/container/Container";
 import {MainContent} from "./layout/main/mainContent/MainContent";
 import HeaderContainer from "./layout/header/HeaderContainer";
+import {connect} from "react-redux";
+import {getAuthUserDataTC} from "./redux/auth-reducer";
 
-function App() {
-    return (
-        <div className="app-wrapper">
-            {/*<Header/>*/}
-            <HeaderContainer/>
-            <Main>
-                <Container>
-                    <Navbar />
-                    <MainContent/>
-                </Container>
-            </Main>
-            <Footer/>
-        </div>
-    );
+class App extends React.Component<MapDispatchToPropsType> {
+    componentDidMount() {
+        this.props.getAuthUserData();
+    }
+
+    render() {
+        return (
+            <div className="app-wrapper">
+                <HeaderContainer/>
+                <Main>
+                    <Container>
+                        <Navbar/>
+                        <MainContent/>
+                    </Container>
+                </Main>
+                <Footer/>
+            </div>
+        );
+    }
 }
 
-export default App;
+type MapDispatchToPropsType = {
+    getAuthUserData: () => void
+}
+
+export default connect(null, {getAuthUserData: getAuthUserDataTC, })(App);
 
