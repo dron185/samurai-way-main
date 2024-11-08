@@ -7,14 +7,22 @@ import {Container} from "./components/container/Container";
 import {MainContent} from "./layout/main/mainContent/MainContent";
 import HeaderContainer from "./layout/header/HeaderContainer";
 import {connect} from "react-redux";
-import {getAuthUserDataTC} from "./redux/auth-reducer";
+import {initializeAppTC} from "./redux/app-reducer";
+import {AppStateType} from "./redux/redux-store";
+import {Preloader} from "./components/preloader/Preloader";
 
-class App extends React.Component<MapDispatchToPropsType> {
+type Props = MapDispatchToPropsType & mapStateToPropsType
+
+class App extends React.Component<Props> {
     componentDidMount() {
-        this.props.getAuthUserData();
+        this.props.initializeApp();
     }
 
     render() {
+        if (!this.props.initialized){
+            return <Preloader/>
+        }
+
         return (
             <div className="app-wrapper">
                 <HeaderContainer/>
@@ -31,8 +39,18 @@ class App extends React.Component<MapDispatchToPropsType> {
 }
 
 type MapDispatchToPropsType = {
-    getAuthUserData: () => void
+    initializeApp: () => void
 }
 
-export default connect(null, {getAuthUserData: getAuthUserDataTC, })(App);
+type mapStateToPropsType = {
+    initialized: boolean
+}
+
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
+    return {
+        initialized: state.app.initialized
+    }
+}
+
+export default connect(mapStateToProps, {initializeApp: initializeAppTC, })(App);
 

@@ -35,7 +35,7 @@ export const setAuthUserDataAC = (data: InitialUsersStateType) => ({type: SET_US
 // thunks
 
 export const getAuthUserDataTC = () => (dispatch: AppDispatch) => {
-    authAPI.me().then(response => {
+    return authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
             const {id: userId, login, email} = response.data.data;
             dispatch(setAuthUserDataAC({id: userId, login, email, isAuth: true}))

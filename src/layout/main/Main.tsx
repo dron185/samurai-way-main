@@ -1,4 +1,4 @@
-import React, {PropsWithChildren, ReactNode} from 'react';
+import React, {ReactNode} from 'react';
 import s from './Main.module.css'
 
 type MainPropsType = {
