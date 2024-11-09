@@ -148,11 +148,12 @@ export const toggleFollowingProgressAC = (isFetching: boolean, userId: number): 
 
 // thunks
 
-export const getUsersThunkCreatorTC = (currentPage: number, pageSize: number) => (dispatch: AppDispatch) => {
+export const requestUsersThunkCreatorTC = (page: number, pageSize: number) => (dispatch: AppDispatch) => {
 
     dispatch(toggleIsFetchingAC(true)); // - когда идет запрос на сервак
+    //dispatch(setCurrentPageAC(page));
 
-    usersAPI.getUsers(currentPage, pageSize)
+    usersAPI.getUsers(page, pageSize)
         .then(data => {
             dispatch(toggleIsFetchingAC(false)); // - когда приходит ответ
             dispatch(setUsersAC(data.items));

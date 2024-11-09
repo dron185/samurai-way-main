@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import {AppDispatch, AppStateType} from "../../../redux/redux-store";
 import {
     followTC,
-    getUsersThunkCreatorTC,
+    requestUsersThunkCreatorTC,
     setCurrentPageAC,
     unfollowTC,
     UsersPageType
@@ -11,6 +11,14 @@ import React from "react";
 import {UsersFC} from "./UsersFC";
 import {Preloader} from "../../../components/preloader/Preloader";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../../redux/users-selectors";
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     // все сайд-эффекты делаются в методе жизненного цикла - componentDidMount():
@@ -50,14 +58,25 @@ type MapDispatchToPropsType = {
 
 export type UsersContainerPropsType = UsersPageType & MapDispatchToPropsType
 
+// const mapStateToProps = (state: AppStateType): UsersPageType => {
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         followingInProgress: state.usersPage.followingInProgress
+//     }
+// }
+
 const mapStateToProps = (state: AppStateType): UsersPageType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state),
     }
 }
 
@@ -73,7 +92,7 @@ const mapDispatchToProps = (dispatch: AppDispatch): MapDispatchToPropsType => {
             dispatch(setCurrentPageAC(pageNumber))
         },
         getUsers: (currentPage: number, pageSize: number) => {
-            dispatch(getUsersThunkCreatorTC(currentPage, pageSize))
+            dispatch(requestUsersThunkCreatorTC(currentPage, pageSize))
         }
     }
 }
