@@ -3,7 +3,7 @@ import s from './ProfileInfo.module.css'
 import photo from '../../../../assets/images/leaves-1350175_1920.jpg'
 import {ProfileType} from "../../../../redux/profile-reducer";
 import {Preloader} from "../../../../components/preloader/Preloader";
-import {ProfileStatus} from "./ProfileStatus";
+import {ProfileStatusWithHooks} from "./ProfileStatusWiyhHooks";
 
 type Props = {
     profile: ProfileType | null
@@ -40,7 +40,7 @@ export const ProfileInfo = (props: Props) => {
             </div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large} alt="avatar"/>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
                 {info.map(el => <div><span className={s.header}>{el.title}</span>{el.value}</div>)}
             </div>
         </div>
