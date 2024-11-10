@@ -7,7 +7,7 @@ export type InitialUsersStateType = DataType & {
     isAuth: boolean
 }
 
-const SET_USER_DATA = 'SET_USER_DATA';
+const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA';
 
 let initialUsersState: InitialUsersStateType = {
     id: 0,
@@ -34,32 +34,32 @@ export const setAuthUserDataAC = (data: InitialUsersStateType) => ({type: SET_US
 
 // thunks
 
-export const getAuthUserDataTC = () => (dispatch: AppDispatch) => {
-    return authAPI.me().then(response => {
-        if (response.data.resultCode === 0) {
-            const {id: userId, login, email} = response.data.data;
-            dispatch(setAuthUserDataAC({id: userId, login, email, isAuth: true}))
-        }
-    })
+export const getAuthUserDataTC = () => async (dispatch: AppDispatch) => {
+    const response = await authAPI.me();
+    if (response.data.resultCode === 0) {
+        const {id: userId, login, email} = response.data.data;
+        dispatch(setAuthUserDataAC({id: userId, login, email, isAuth: true}))
+    }
+
 }
 
-export const loginTC = (data: LoginParams) => (dispatch: AppDispatch) => {
-    authAPI.login(data).then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(getAuthUserDataTC())
-        } else {
-            let message = response.data.messages.length > 0 ?
-                response.data.messages[0] : "Some error"
-            dispatch(stopSubmit("login", {_error: message}))
-        }
-    })
+export const loginTC = (data: LoginParams) => async (dispatch: AppDispatch) => {
+    const response = await authAPI.login(data)
+
+    if (response.data.resultCode === 0) {
+        dispatch(getAuthUserDataTC())
+    } else {
+        let message = response.data.messages.length > 0 ?
+            response.data.messages[0] : "Some error"
+        dispatch(stopSubmit("login", {_error: message}))
+    }
+
 }
 
-export const logoutTC = () => (dispatch: AppDispatch) => {
-    authAPI.logout().then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(setAuthUserDataAC({id: null, login: null, email: null, isAuth: false}))
-        }
-    })
+export const logoutTC = () => async (dispatch: AppDispatch) => {
+    const response = await authAPI.logout()
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserDataAC({id: null, login: null, email: null, isAuth: false}))
+    }
 }
 
