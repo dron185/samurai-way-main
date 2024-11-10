@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import s from './MyPosts.module.css';
 import {Post} from './post/Post'
 import {PostType} from "../../../../redux/profile-reducer";
@@ -39,7 +39,7 @@ const AddNewPostForm = (props: InjectedFormProps<FormDataType>) => {
 const AddNewPostFormRedux = reduxForm<FormDataType>({form: "ProfileAddNewPostForm"})(AddNewPostForm)
 
 
-export const MyPosts = (props : MyPostsPropsType) => {
+export const MyPosts = memo((props : MyPostsPropsType) => {
 
     const postsElements = props.posts.map(el =>
         <Post key={el.id} message={el.message} likesCount={el.likesCount}/>)
@@ -58,5 +58,5 @@ export const MyPosts = (props : MyPostsPropsType) => {
             </div>
         </div>
     );
-};
+});
 
