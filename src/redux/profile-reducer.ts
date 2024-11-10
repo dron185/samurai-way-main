@@ -127,27 +127,22 @@ export const deletePostAC = (postId: number) => (
     {type: DELETE_POST, postId} as const
 )
 
+
 // thunks
-export const getUserProfileTC = (userId: number) => (dispatch: AppDispatch) => {
-    profileAPI.getProfile(userId)
-        .then(response => {
-            dispatch(setUserProfileAC(response.data));
-        });
+export const getUserProfileTC = (userId: number) => async (dispatch: AppDispatch) => {
+    const response = await profileAPI.getProfile(userId)
+    dispatch(setUserProfileAC(response.data));
 }
 
-export const getStatusTC = (userId: number) => (dispatch: AppDispatch) => {
-    profileAPI.getStatus(userId)
-        .then(response => {
-            dispatch(setStatusAC(response.data));
-        });
+export const getStatusTC = (userId: number) => async (dispatch: AppDispatch) => {
+    const response = await profileAPI.getStatus(userId)
+    dispatch(setStatusAC(response.data));
 }
 
-export const updateStatusTC = (status: string) => (dispatch: AppDispatch) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setStatusAC(status));
-            }
-        });
+export const updateStatusTC = (status: string) => async (dispatch: AppDispatch) => {
+    const response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setStatusAC(status));
+    }
 }
 
