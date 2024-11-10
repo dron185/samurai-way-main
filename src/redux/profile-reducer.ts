@@ -55,14 +55,18 @@ export type setUserStatusActionType = {
     status: string
 }
 
+export type deletePostActionType = ReturnType<typeof deletePostAC>
+
 export type ActionsType =
     | addPostActionType
     | setUserProfileActionType
     | setUserStatusActionType
+    | deletePostActionType
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_STATUS = 'SET-STATUS';
+const DELETE_POST = 'DELETE-POST';
 
 
 let initialProfileState: ProfilePageType = {
@@ -99,6 +103,11 @@ export const profileReducer = (state: ProfilePageType = initialProfileState, act
                 ...state,
                 profile: action.profile,
             }
+        case DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(p => p.id !== action.postId),
+            }
         default:
             return state;
     }
@@ -106,14 +115,17 @@ export const profileReducer = (state: ProfilePageType = initialProfileState, act
 
 export const addPostAC = (postText: string): addPostActionType => ({type: ADD_POST, postText: postText})
 
-const setUserProfileAC = (profile: ProfileType): setUserProfileActionType => (
+export const setUserProfileAC = (profile: ProfileType): setUserProfileActionType => (
     {type: SET_USER_PROFILE, profile}
 )
 
-const setStatusAC = (status: string): setUserStatusActionType => (
+export const setStatusAC = (status: string): setUserStatusActionType => (
     {type: SET_STATUS, status}
 )
 
+export const deletePostAC = (postId: number) => (
+    {type: DELETE_POST, postId} as const
+)
 
 // thunks
 export const getUserProfileTC = (userId: number) => (dispatch: AppDispatch) => {
