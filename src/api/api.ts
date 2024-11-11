@@ -16,7 +16,7 @@ type getUsersResponse = {
     error: string | null
 }
 
-type followResponse = {
+export type followResponse = {
     resultCode: number
     messages: string[]
     data: {}

@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import {AppDispatch, AppStateType} from "../../../redux/redux-store";
 import {
     followTC,
-    requestUsersThunkCreatorTC,
+    requestUsersTC,
     setCurrentPageAC,
     unfollowTC,
     UsersPageType
@@ -92,7 +92,7 @@ const mapDispatchToProps = (dispatch: AppDispatch): MapDispatchToPropsType => {
             dispatch(setCurrentPageAC(pageNumber))
         },
         getUsers: (currentPage: number, pageSize: number) => {
-            dispatch(requestUsersThunkCreatorTC(currentPage, pageSize))
+            dispatch(requestUsersTC(currentPage, pageSize))
         }
     }
 }
