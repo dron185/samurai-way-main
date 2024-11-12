@@ -46,10 +46,12 @@ const mapDispatchToProps = (dispatch: Dispatch<DialogsActionsType>): MapDispatch
     }
 }
 
-export const DialogsContainer = compose<ComponentType>(
+const DialogsContainer = compose<ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),
     withAuthRedirect
 )(Dialogs)
+
+export default DialogsContainer;
 
 // ф-ция connect() создает контейнерную компоненту, внутри ее - она рендерит презентационную компоненту, и внутрь презентационной компоненты в качестве пропсов - передает те св-ва, которые сидят в этих 2-х объектах - которые возвращает f1() и f2().
 
