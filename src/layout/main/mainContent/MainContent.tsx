@@ -6,6 +6,7 @@ import {Settings} from "../settings/Settings";
 import s from './MainContent.module.css'
 import UsersContainer from "../users/UsersContainer";
 import {LoginContainer} from "../../../components/Login/Login";
+import {withSuspense} from "../../../hoc/withSuspense";
 
 const ProfileContainer = lazy(() => import("../profile/ProfileContainer"));
 const DialogsContainer = lazy(() => import("../dialogs/DialogsContainer"));
@@ -19,11 +20,7 @@ export const MainContent: React.FC = () => {
                     <DialogsContainer/>
                 </Suspense>
             }}/>
-            <Route path={'/profile/:userId?'} render={() => {
-                return <Suspense fallback={<div>Loading...</div>}>
-                    <ProfileContainer/>
-                </Suspense>
-            }}/>
+            <Route path={'/profile/:userId?'} render={withSuspense(ProfileContainer)}/>
             <Route path={'/news'} component={News}/>
             <Route path={'/music'} component={Music}/>
             <Route path={'/settings'} component={Settings}/>
