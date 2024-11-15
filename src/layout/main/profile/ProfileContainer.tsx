@@ -49,7 +49,7 @@ export class ProfileContainer extends React.Component<ProfileContainerPropsType 
 }
 
 type mapStateToPropsType = {
-    profile: ProfileType | null
+    profile: ProfileType/* | null*/
     status: string
     authorizedUserId: number | null
     isAuth: boolean

@@ -9,19 +9,19 @@ export type PostType = {
 
 export type ProfilePageType = {
     posts: PostType[]
-    profile: ProfileType | null
+    profile: ProfileType/* | null*/
     status: string
 }
 
-type ProfileContactsType = {
+export type ProfileContactsType = {
     facebook: string
     website: string
     vk: string
     twitter: string
     instagram: string
-    youtube: null | string
+    youtube: string
     github: string
-    mainLink: null | string
+    mainLink: string
 }
 
 export type ProfileType = {
@@ -42,7 +42,7 @@ export type addPostActionType = {
 
 export type setUserProfileActionType = {
     type: typeof SET_USER_PROFILE
-    profile: ProfileType | null
+    profile: ProfileType/* | null*/
 }
 
 export type setUserStatusActionType = {
@@ -75,7 +75,27 @@ let initialProfileState: ProfilePageType = {
         {id: 3, message: "BlaBla", likesCount: 7},
         {id: 4, message: "DaDa", likesCount: 5},
     ],
-    profile: null,
+    profile: {
+        aboutMe: "",
+        contacts: {
+            facebook: "",
+            website: "",
+            vk: "",
+            twitter: "",
+            instagram: "",
+            youtube: "",
+            github: "",
+            mainLink: "",
+        },
+        lookingForAJob: true,
+        lookingForAJobDescription: "",
+        fullName: "",
+        userId: 0,
+        photos: {
+            small: "",
+            large: "",
+        }
+    },
     status: ""
 }
 
@@ -109,7 +129,7 @@ export const profileReducer = (state: ProfilePageType = initialProfileState, act
             }
         case SAVE_PHOTO_SUCCESS:
             return {
-                ...state, profile: state.profile ? {...state.profile, photos: action.photos} : null
+                ...state, profile: {...state.profile, photos: action.photos}
             }
         default:
             return state;

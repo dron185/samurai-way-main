@@ -4,12 +4,32 @@ import {
     deletePostAC,
     deletePostActionType,
     ProfilePageType,
-    profileReducer
+    profileReducer, ProfileType
 } from "./profile-reducer";
 
 let startState: ProfilePageType = {
     posts: [],
-    profile: null,
+    profile: {
+        aboutMe: "",
+        contacts: {
+            facebook: "",
+            website: "",
+            vk: "",
+            twitter: "",
+            instagram: "",
+            youtube: "",
+            github: "",
+            mainLink: "",
+        },
+        lookingForAJob: true,
+        lookingForAJobDescription: "",
+        fullName: "",
+        userId: 0,
+        photos: {
+            small: "",
+            large: "",
+        }
+    },
     status: ""
 }
 
@@ -21,7 +41,27 @@ beforeEach(() => {
             {id: 3, message: "BlaBla", likesCount: 7},
             {id: 4, message: "DaDa", likesCount: 5},
         ],
-        profile: null,
+        profile: {
+            aboutMe: "",
+            contacts: {
+                facebook: "",
+                website: "",
+                vk: "",
+                twitter: "",
+                instagram: "",
+                youtube: "",
+                github: "",
+                mainLink: "",
+            },
+            lookingForAJob: true,
+            lookingForAJobDescription: "",
+            fullName: "",
+            userId: 0,
+            photos: {
+                small: "",
+                large: "",
+            }
+        },
         status: ""
     }
 })
