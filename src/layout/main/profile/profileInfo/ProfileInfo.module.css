@@ -16,3 +16,7 @@
 .header {
     font-weight: bold;
 }
+
+.mainPhoto {
+    max-width: 300px;
+}
