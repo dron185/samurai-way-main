@@ -11,7 +11,7 @@ export const Navbar: React.FC = () => {
     const friends = useSelector<AppStateType, DialogType[]>(state => state.sidebar.friends)
 
     return (
-        <div>
+        <div className={s.navContainer}>
             <nav className={s.nav}>
                 <ul className={s.list}>
                     {/*<li className={`${s.item} ${s.active}`}>*/}

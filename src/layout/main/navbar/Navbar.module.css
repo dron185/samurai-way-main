@@ -1,6 +1,11 @@
+.navContainer {
+    background-color: #2990b6;
+    padding: 20px;
+}
+
 .nav {
     background-color: transparent;
-    padding: 20px 20px 80px 0;
+    margin-bottom: 80px;
 }
 
 .list > *:not(:last-child) {
@@ -14,7 +19,7 @@
 
 .item a {
     color: white;
-    background-color: #324A5E;
+    //background-color: #324A5E;
     border-radius: 10px;
 }
 
