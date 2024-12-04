@@ -4,6 +4,6 @@
 
 .footerContainer {
     padding: 20px 0;
-    background-color: #6e6b6b;
+    background-color: var(--global-third-color);
     border-radius: 15px;
 }

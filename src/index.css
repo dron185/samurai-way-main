@@ -10,7 +10,7 @@ body {
   /*scrollbar-gutter: auto;*/
 
 //background-color: bisque;
-  background-color: #e1d4c9
+  background-color: var(--global-primary-color)
 }
 
 code {
@@ -57,5 +57,9 @@ html, body {
 }
 
 :root {
-  --color-primary: #324A5E;
+  --global-primary-color: #e1d4c9;
+  --global-secondary-color: #324A5E;
+  --global-third-color: #6e6b6b;
+  /*--global-fourth-color: #665F55;*/
 }
+

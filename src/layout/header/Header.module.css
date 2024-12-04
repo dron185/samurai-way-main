@@ -2,7 +2,7 @@
     padding: 20px 0;
     //background-color: #3e576c;
     //background-color: #665F55;
-    background-color: #e1d4c9;
+    /*background-color: #e1d4c9;*/
     min-height: 90px;
 }
 
@@ -20,7 +20,7 @@
 
 .login {
     font-size: 18px;
-    color: var(--color-primary);
+    color: var(--global-secondary-color);
     font-weight: 600;
 }
 
@@ -28,10 +28,10 @@
 .button {
     padding: 8px 16px 8px 16px;
     border-radius: 100px;
-    background-color: #e1d4c9;
-    border: 1px solid var(--color-primary);
+    background-color: var(--global-primary-color);
+    border: 1px solid var(--global-secondary-color);
     cursor: pointer;
     line-height: 150%;
     font-weight: 700;
-    color: var(--color-primary);
+    color: var(--global-secondary-color);
 }
