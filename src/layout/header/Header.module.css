@@ -1,24 +1,37 @@
 .header {
     padding: 20px 0;
-    background-color: #324A5E;
+    //background-color: #3e576c;
+    //background-color: #665F55;
+    background-color: #e1d4c9;
     min-height: 90px;
 }
 
-/*.header div {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*}*/
-
-.logo {
-    border: 5px solid white;
-    border-radius: 12px;
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .loginBlock {
-    float: right;
-    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.loginBlock a {
-    color: white;
+.login {
+    font-size: 18px;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+
+.button {
+    padding: 8px 16px 8px 16px;
+    border-radius: 100px;
+    background-color: #e1d4c9;
+    border: 1px solid var(--color-primary);
+    cursor: pointer;
+    line-height: 150%;
+    font-weight: 700;
+    color: var(--color-primary);
 }

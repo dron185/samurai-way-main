@@ -5,6 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /*overflow-y: scroll;*/
+  /*scrollbar-gutter: auto;*/
+
+//background-color: bisque;
+  background-color: #e1d4c9
 }
 
 code {
@@ -48,4 +54,8 @@ input, button {
 html, body {
   height: 100%;
   line-height: 1;
+}
+
+:root {
+  --color-primary: #324A5E;
 }

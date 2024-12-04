@@ -1,4 +1,11 @@
 .footer {
     /*flex: 0 0 auto;*/
-    background-color: #7ad97a;
+
+    padding: 20px 0;
+}
+
+.footerContainer {
+    padding: 20px 0;
+    background-color: #6e6b6b;
+    border-radius: 15px;
 }
