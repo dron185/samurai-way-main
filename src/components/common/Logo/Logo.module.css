@@ -4,5 +4,5 @@
     gap: 10px;
     font-size: 24px;
     font-weight: 700;
-    color: var(--color-primary);
+    color: var(--global-secondary-color);
 }

@@ -1,9 +1,27 @@
+.paginatorContainer {
+    padding: 10px 0 20px;
+}
+
 .page {
     cursor: pointer;
     margin: 10px;
+    color: var(--global-primary-color);
 }
 
 .selectedPage {
     color: #ffffff;
     font-weight: bold;
+    /*border: 1px solid var(--global-primary-color);*/
+    /*border-radius: 50%*/
+}
+
+.button {
+    padding: 8px 16px 8px 16px;
+    border-radius: 100px;
+    background-color: var(--global-primary-color);
+    border: 1px solid var(--global-secondary-color);
+    cursor: pointer;
+    line-height: 150%;
+    font-weight: 700;
+    color: var(--global-secondary-color);
 }

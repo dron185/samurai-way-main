@@ -1,13 +1,14 @@
 .header {
     padding: 20px 0;
-    background-color: #324A5E;
+    /*background-color: #e1d4c9;*/
     min-height: 90px;
 }
 
-/*.header div {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*}*/
+.headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 .logo {
     border: 5px solid white;
@@ -15,10 +16,27 @@
 }
 
 .loginBlock {
-    float: right;
-    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.loginBlock a {
-    color: white;
+
+
+.login {
+    font-size: 18px;
+    color: var(--global-secondary-color);
+    font-weight: 600;
+}
+
+
+.button {
+    padding: 8px 16px 8px 16px;
+    border-radius: 100px;
+    background-color: var(--global-primary-color);
+    border: 1px solid var(--global-secondary-color);
+    cursor: pointer;
+    line-height: 150%;
+    font-weight: 700;
+    color: var(--global-secondary-color);
 }

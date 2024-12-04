@@ -1,6 +1,7 @@
 .mainContent {
-    background-color: #f1a68b;
+    background-color: var(--global-third-color);
     /*flex: 1 1 70%;*/
     flex-grow: 1;
     border-radius: 15px;
+    padding: 20px;
 }
