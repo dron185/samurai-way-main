@@ -2,6 +2,7 @@ import {UsersPageType, UserType} from "../../../redux/users-reducer";
 import React from "react";
 import {Paginator} from "../../../components/common/Paginator/Paginator";
 import {User} from "./User";
+import s from "./Users.module.css";
 
 type UsersFCPropsType = {
     onPageChanged: (pageNumber: number) => void
@@ -25,7 +26,7 @@ export const UsersFC: React.FC<UsersFCPropsType> = ({
                 onPageChanged={onPageChanged}
                 portionSize={10}
             />
-            <div>
+            <div className={s.users}>
                 {
                     props.users.map((u: UserType) =>
                         <User

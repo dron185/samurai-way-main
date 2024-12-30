@@ -8,7 +8,7 @@ import UsersContainer from "../users/UsersContainer";
 import {LoginContainer} from "../../../components/Login/Login";
 import {withSuspense} from "../../../hoc/withSuspense";
 
-const ProfileContainer = lazy(() => import("../profile/ProfileContainer"));
+const ProfileContainer = lazy(() => import("../profile/profileContainer/ProfileContainer"));
 const DialogsContainer = lazy(() => import("../dialogs/DialogsContainer"));
 
 export const MainContent: React.FC = () => {

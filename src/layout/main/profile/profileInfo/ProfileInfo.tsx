@@ -55,23 +55,29 @@ export const ProfileInfo = (props: Props) => {
 
     return (
         <div className={s.profileInfo}>
-            <div className={s.profilePhoto}>
-                <img src={photo} alt="Photo"/>
-            </div>
+            {/*<div className={s.profilePhoto}>*/}
+            {/*    <img src={photo} alt="Photo"/>*/}
+            {/*</div>*/}
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large || userPhoto}
-                     alt="avatar"
-                     className={s.mainPhoto}
-                />
-                {props.isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
+                <div className={s.photoContainer}>
+                    <img src={props.profile.photos.large || userPhoto}
+                         alt="avatar"
+                         className={s.mainPhoto}
+                    />
+                    {props.isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
+
+                    <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+                </div>
 
                 {editMode ? <ProfileDataForm profile={props.profile}/> :
                     <ProfileData
                         profile={props.profile}
                         isOwner={props.isOwner}
-                        goToEditMode={() => {setEditMode(true)}}/>}
+                        goToEditMode={() => {
+                            setEditMode(true)
+                        }}/>}
 
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+
                 {/*{info.map(el =>*/}
                 {/*    <div key={el.id}>*/}
                 {/*        <span className={s.header}>{el.title}</span>{el.value}*/}
@@ -95,24 +101,26 @@ type ProfileDataProps = {
 const ProfileData = ({profile, isOwner, goToEditMode}: ProfileDataProps) => {
 
     return (
-        <div>
-            {isOwner && <div><button onClick={goToEditMode}>edit</button></div>}
+        <div className={s.data}>
+            {isOwner && <div>
+                <button onClick={goToEditMode}>edit</button>
+            </div>}
             <div>
-                <b>Full name</b>: {profile.fullName}
+                <span>Full name:</span> {profile.fullName}
             </div>
             <div>
-                <b>Looking for a job</b>: {profile.lookingForAJob ? "yes" : "no"}
+                <span>Looking for a job:</span> {profile.lookingForAJob ? "yes" : "no"}
             </div>
             {profile.lookingForAJob &&
                 <div>
-                    <b>My professional skills</b>: {profile.lookingForAJobDescription}
+                    <span>My professional skills:</span> {profile.lookingForAJobDescription}
                 </div>
             }
             <div>
-                <b>About me</b>: {profile.aboutMe}
+                <span>About me:</span> {profile.aboutMe}
             </div>
             <div>
-                <b>Contacts</b>: {Object.keys(profile.contacts).map((key: string) => {
+                <span>Contacts:</span> {Object.keys(profile.contacts).map((key: string) => {
                 return <Contact
                     key={key}
                     contactTitle={key}
@@ -125,7 +133,7 @@ const ProfileData = ({profile, isOwner, goToEditMode}: ProfileDataProps) => {
 }
 
 const Contact = ({contactTitle, contactValue}: ContactProps) => {
-    return <div className={s.contact}><b>{contactTitle}</b>: {contactValue}</div>
+    return <div className={s.contact}><span>{contactTitle}:</span> {contactValue}</div>
 }
 
 

@@ -1,5 +1,8 @@
 .mainContent {
-    background-color: var(--global-third-color);
+    /*background-color: var(--global-third-color);*/
+    background-color: #9e7d6d;
+    /*background-color: #a47b67;*/
+    /*background-color: #5b8498;*/
     /*flex: 1 1 70%;*/
     flex-grow: 1;
     border-radius: 15px;

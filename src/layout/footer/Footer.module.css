@@ -1,9 +1,16 @@
 .footer {
-    padding: 20px 0;
+    padding: 20px 0 0;
+}
+
+.footerMain {
+    background-color: var(--global-third-color);
 }
 
 .footerContainer {
+
+}
+
+.footerContent {
     padding: 20px 0;
-    background-color: var(--global-third-color);
     border-radius: 15px;
 }

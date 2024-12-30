@@ -1,4 +1,8 @@
 .profile {
     display: flex;
     flex-direction: column;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 150%;
+    color: var(--global-primary-color);
 }

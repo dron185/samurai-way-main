@@ -1,18 +1,18 @@
 .profileInfo {
-    display: flex;
-    flex-direction: column;
-}
-
-
-.profilePhoto img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 15px 15px 0 0;
+    /*display: flex;*/
+    /*flex-direction: column;*/
 }
 
 .descriptionBlock {
-    padding: 10px;
+    display: flex;
+    /*gap: 50px;*/
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.photoContainer {
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
@@ -21,8 +21,44 @@
 
 .mainPhoto {
     max-width: 300px;
+    width: 300px;
+    height: 300px;
+    border-radius: 20%;
+    object-fit: cover;
 }
 
 .contact {
     padding-left: 10px;
+    color: var(--global-primary-color);
+}
+
+.data {
+    margin-right: 50px;
+    & span {
+        font-weight: 700;
+        color: var(--global-secondary-color);
+    }
+    & button {
+        min-height: 30px;
+        margin: 0 0 10px 0;
+        padding: 5px 25px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        line-height: 150%;
+        font-weight: 700;
+        border: 1px solid var(--global-secondary-color);
+        text-align: center;
+        background-color: var(--global-primary-color);
+        color: var(--global-secondary-color);
+        cursor: pointer;
+        transition: all 0.3s ease 0s;
+        &:hover {
+            background-color: #9e7d6d;
+            color: var(--global-primary-color);
+            border: 1px solid var(--global-primary-color);
+        }
+    }
 }

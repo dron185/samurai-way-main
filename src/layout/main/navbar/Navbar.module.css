@@ -1,6 +1,6 @@
 .navContainer {
-    background-color: #2990b6;
-    padding: 20px;
+    /*background-color: #2990b6;*/
+    padding: 20px 15px 20px 0;
     border-radius: 15px;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .item a {
-    color: white;
+    color: rgba(59, 74, 94, 0.95);
     //background-color: #324A5E;
     border-radius: 10px;
 

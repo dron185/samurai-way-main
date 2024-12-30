@@ -1,10 +1,12 @@
 import React from 'react';
-import {Profile} from "./Profile";
+import {Profile} from "../Profile";
 import {connect} from "react-redux";
-import {getStatusTC, getUserProfileTC, ProfileType, savePhotoTC, updateStatusTC} from "../../../redux/profile-reducer";
-import {AppStateType} from "../../../redux/redux-store";
+import {getStatusTC, getUserProfileTC, ProfileType, savePhotoTC, updateStatusTC} from "../../../../redux/profile-reducer";
+import {AppStateType} from "../../../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
+import s from "./ProfileContainer.module.css";
+import photo from "../../../../assets/images/leaves-1350175_1920.jpg";
 
 type MatchParams = {
     userId: string;
@@ -38,13 +40,24 @@ export class ProfileContainer extends React.Component<ProfileContainerPropsType 
     }
 
     render() {
-        return <Profile {...this.props}
-                        profile={this.props.profile}
-                        status={this.props.status}
-                        updateStatus={this.props.updateStatus}
-                        isOwner={!this.props.match.params.userId}
-                        savePhoto={this.props.savePhoto}
-        />
+        return (
+            <div className={s.profileContainer}>
+                <div className={s.profilePhoto}>
+                    <img src={photo} alt="Photo"/>
+                </div>
+                < Profile
+                    {...
+                        this.props
+                    }
+                    profile={this.props.profile}
+                    status={this.props.status}
+                    updateStatus={this.props.updateStatus}
+                    isOwner={!this.props.match.params.userId}
+                    savePhoto={this.props.savePhoto}
+                />
+            </div>
+        )
+
     }
 }
 
