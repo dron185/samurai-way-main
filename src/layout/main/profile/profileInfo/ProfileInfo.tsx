@@ -1,11 +1,11 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from './ProfileInfo.module.css'
-import photo from '../../../../assets/images/leaves-1350175_1920.jpg'
-import {ProfileContactsType, ProfileType} from "../../../../redux/profile-reducer";
+import {ProfileType} from "../../../../redux/profile-reducer";
 import {Preloader} from "../../../../components/preloader/Preloader";
 import {ProfileStatusWithHooks} from "./ProfileStatusWiyhHooks";
 import userPhoto from "../../../../assets/images/avatar4.png";
-import {ProfileDataForm} from "./ProfileDataForm";
+import ProfileDataFormReduxForm, {ProfileDataForm} from "./ProfileDataForm/ProfileDataForm";
+import {ProfileData} from "./ProfileData/ProfileData";
 
 type Props = {
     profile: ProfileType
@@ -69,7 +69,7 @@ export const ProfileInfo = (props: Props) => {
                     <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
                 </div>
 
-                {editMode ? <ProfileDataForm profile={props.profile}/> :
+                {editMode ? <ProfileDataFormReduxForm profile={props.profile}/> :
                     <ProfileData
                         profile={props.profile}
                         isOwner={props.isOwner}
@@ -87,53 +87,8 @@ export const ProfileInfo = (props: Props) => {
     );
 };
 
-type ContactProps = {
-    contactTitle: string
-    contactValue: string
-}
 
-type ProfileDataProps = {
-    profile: ProfileType
-    isOwner: boolean
-    goToEditMode: () => void
-}
 
-const ProfileData = ({profile, isOwner, goToEditMode}: ProfileDataProps) => {
 
-    return (
-        <div className={s.data}>
-            {isOwner && <div>
-                <button onClick={goToEditMode}>edit</button>
-            </div>}
-            <div>
-                <span>Full name:</span> {profile.fullName}
-            </div>
-            <div>
-                <span>Looking for a job:</span> {profile.lookingForAJob ? "yes" : "no"}
-            </div>
-            {profile.lookingForAJob &&
-                <div>
-                    <span>My professional skills:</span> {profile.lookingForAJobDescription}
-                </div>
-            }
-            <div>
-                <span>About me:</span> {profile.aboutMe}
-            </div>
-            <div>
-                <span>Contacts:</span> {Object.keys(profile.contacts).map((key: string) => {
-                return <Contact
-                    key={key}
-                    contactTitle={key}
-                    contactValue={profile.contacts[key as keyof ProfileContactsType]}
-                />
-            })}
-            </div>
-        </div>
-    )
-}
-
-const Contact = ({contactTitle, contactValue}: ContactProps) => {
-    return <div className={s.contact}><span>{contactTitle}:</span> {contactValue}</div>
-}
 
 
