@@ -4,8 +4,9 @@ import {ProfileType} from "../../../../redux/profile-reducer";
 import {Preloader} from "../../../../components/preloader/Preloader";
 import {ProfileStatusWithHooks} from "./ProfileStatusWiyhHooks";
 import userPhoto from "../../../../assets/images/avatar4.png";
-import ProfileDataFormReduxForm, {ProfileDataForm} from "./ProfileDataForm/ProfileDataForm";
+import ProfileDataFormReduxForm from "./ProfileDataForm/ProfileDataForm";
 import {ProfileData} from "./ProfileData/ProfileData";
+import {FormDataType} from "../../../../components/Login/Login";
 
 type Props = {
     profile: ProfileType
@@ -31,26 +32,14 @@ export const ProfileInfo = (props: Props) => {
         return <Preloader/>
     }
 
-    // const info: Info = [
-    //     {id: v1(), title: 'About me: ', value: props.profile.aboutMe},
-    //     {id: v1(), title: 'Full name: ', value: props.profile.fullName},
-    //     {id: v1(), title: 'Looking for a job description: ', value: props.profile.lookingForAJobDescription},
-    //     {id: v1(), title: 'Contacts: ', value: ''},
-    //     {id: v1(), title: 'Facebook: ', value: props.profile.contacts.facebook},
-    //     {id: v1(), title: 'Github: ', value: props.profile.contacts.github},
-    //     {id: v1(), title: 'Twitter: ', value: props.profile.contacts.twitter},
-    //     {id: v1(), title: 'Instagram: ', value: props.profile.contacts.instagram},
-    //     {id: v1(), title: 'VK: ', value: props.profile.contacts.vk},
-    //     {id: v1(), title: 'Youtube: ', value: props.profile.contacts.youtube},
-    //     {id: v1(), title: 'Website: ', value: props.profile.contacts.website},
-    //     {id: v1(), title: 'Main link: ', value: props.profile.contacts.mainLink},
-    //     {id: v1(), title: 'Looking for a job: ', value: props.profile.lookingForAJob}
-    // ];
-
     const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {
             props.savePhoto(e.target.files[0]);
         }
+    }
+
+    const onSubmit = (formData: FormDataType) => {
+        console.log(formData)
     }
 
     return (
@@ -58,6 +47,7 @@ export const ProfileInfo = (props: Props) => {
             {/*<div className={s.profilePhoto}>*/}
             {/*    <img src={photo} alt="Photo"/>*/}
             {/*</div>*/}
+
             <div className={s.descriptionBlock}>
                 <div className={s.photoContainer}>
                     <img src={props.profile.photos.large || userPhoto}
@@ -69,7 +59,7 @@ export const ProfileInfo = (props: Props) => {
                     <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
                 </div>
 
-                {editMode ? <ProfileDataFormReduxForm profile={props.profile}/> :
+                {editMode ? <ProfileDataFormReduxForm profile={props.profile} onSubmit={onSubmit}/> :
                     <ProfileData
                         profile={props.profile}
                         isOwner={props.isOwner}

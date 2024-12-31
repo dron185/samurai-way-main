@@ -2,20 +2,19 @@ import {ProfileType} from "../../../../../redux/profile-reducer";
 import React from "react";
 import {Input, Textarea} from "../../../../../components/common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../../../../utils/validators/validators";
-import {Field, reduxForm} from "redux-form";
-import {FormDataType} from "../../../dialogs/Dialogs";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {FormDataType} from "../../../../../components/Login/Login";
+
 
 type Props = {
     profile: ProfileType
 }
 
-export const ProfileDataForm = ({profile}: Props) => {
+const ProfileDataForm: React.FC<Props & InjectedFormProps<FormDataType, Props>> = ({profile, handleSubmit}) => {
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <div>
-                <button onClick={() => {
-                }}>save
-                </button>
+                <button type={"submit"}>save</button>
             </div>
             <div>
                 <b>Full name</b>: <Field
@@ -58,3 +57,4 @@ export const ProfileDataForm = ({profile}: Props) => {
 const ProfileDataFormReduxForm = reduxForm<FormDataType, Props>({form: "edit-profile"})(ProfileDataForm)
 
 export default ProfileDataFormReduxForm
+
