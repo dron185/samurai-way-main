@@ -1,12 +1,20 @@
 import React from 'react';
 import {Profile} from "../Profile";
 import {connect} from "react-redux";
-import {getStatusTC, getUserProfileTC, ProfileType, savePhotoTC, updateStatusTC} from "../../../../redux/profile-reducer";
+import {
+    getStatusTC,
+    getUserProfileTC,
+    ProfileType,
+    savePhotoTC,
+    saveProfileTC,
+    updateStatusTC
+} from "../../../../redux/profile-reducer";
 import {AppStateType} from "../../../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 import s from "./ProfileContainer.module.css";
 import photo from "../../../../assets/images/leaves-1350175_1920.jpg";
+import {FormDataType} from "../../../../components/Login/Login";
 
 type MatchParams = {
     userId: string;
@@ -72,7 +80,8 @@ type MapDispatchToPropsType = {
     getUserProfile: (userId: number | null) => void
     getUserStatus: (userId: number | null) => void
     updateStatus: (status: string) => void
-    savePhoto: (file: File) => void;
+    savePhoto: (file: File) => void
+    saveProfile: (formData: FormDataType) => void
 }
 
 type ProfileContainerPropsType = mapStateToPropsType & MapDispatchToPropsType
@@ -91,6 +100,7 @@ export default compose<React.ComponentType>(
         getUserStatus: getStatusTC,
         updateStatus: updateStatusTC,
         savePhoto: savePhotoTC,
+        saveProfile: saveProfileTC
     }),
     withRouter,
     //withAuthRedirect,

@@ -7,10 +7,10 @@ import {FormDataType} from "../../../../../components/Login/Login";
 
 
 type Props = {
-    profile: ProfileType
+    initialValues: ProfileType
 }
 
-const ProfileDataForm: React.FC<Props & InjectedFormProps<FormDataType, Props>> = ({profile, handleSubmit}) => {
+const ProfileDataForm: React.FC<Props & InjectedFormProps<FormDataType, Props>> = ({initialValues, handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
@@ -42,7 +42,7 @@ const ProfileDataForm: React.FC<Props & InjectedFormProps<FormDataType, Props>> 
                 />
             </div>
             <div>
-                <b>About me</b>: {profile.aboutMe}
+                <b>About me</b>:
                 <Field
                     component={Textarea}
                     validate={[maxLengthCreator(50)]}

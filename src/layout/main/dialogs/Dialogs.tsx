@@ -6,7 +6,7 @@ import avatar from "../../../assets/images/avatar1.png";
 import {NewDialogsPropsType} from "./DialogsContainer";
 import {AddMessageFormRedux} from "./AddMessageForm/AddMessageForm";
 
-export type FormDataType = { newMessageBody: string }
+export type FormDataDialogsType = { newMessageBody: string }
 
 export const Dialogs: React.FC<NewDialogsPropsType> = (props) => {
 
@@ -18,7 +18,7 @@ export const Dialogs: React.FC<NewDialogsPropsType> = (props) => {
         </div>
     )
 
-    const addNewMessage = (formData: FormDataType) => {
+    const addNewMessage = (formData: FormDataDialogsType) => {
         props.addMessage(formData.newMessageBody)
     }
 

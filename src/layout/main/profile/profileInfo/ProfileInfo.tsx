@@ -13,7 +13,8 @@ type Props = {
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
-    savePhoto: (file: File) => void;
+    savePhoto: (file: File) => void
+    saveProfile: (formData: FormDataType) => void
 }
 
 type InfoItem = {
@@ -39,7 +40,8 @@ export const ProfileInfo = (props: Props) => {
     }
 
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+        props.saveProfile(formData)
+        setEditMode(false)
     }
 
     return (
@@ -59,7 +61,11 @@ export const ProfileInfo = (props: Props) => {
                     <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
                 </div>
 
-                {editMode ? <ProfileDataFormReduxForm profile={props.profile} onSubmit={onSubmit}/> :
+                {editMode ?
+                    <ProfileDataFormReduxForm
+                        initialValues={props.profile}
+                        onSubmit={onSubmit}
+                    /> :
                     <ProfileData
                         profile={props.profile}
                         isOwner={props.isOwner}

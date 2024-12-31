@@ -1,4 +1,4 @@
-import {AppDispatch} from "./redux-store";
+import {AppDispatch, AppStateType} from "./redux-store";
 import {profileAPI, ProfilePhotosType} from "../api/api";
 
 export type PostType = {
@@ -177,6 +177,20 @@ export const savePhotoTC = (file: File) => async (dispatch: AppDispatch) => {
     const response = await profileAPI.savePhoto(file)
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccessAC(response.data.data.photos));
+    }
+}
+
+export const saveProfileTC = (profile: ProfileType) => async (dispatch: AppDispatch, getState: () => AppStateType) => {
+    const userId = getState().auth.id
+    const response = await profileAPI.saveProfile(profile)
+
+    if (userId === null) {
+        console.error("User ID is null. User is not authorized.");
+        return;
+    }
+
+    if (response.data.resultCode === 0) {
+        dispatch(getUserProfileTC(userId));
     }
 }
 
